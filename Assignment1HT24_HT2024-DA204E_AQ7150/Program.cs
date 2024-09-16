@@ -8,14 +8,30 @@ namespace MyApp
         static void Main(string[] args)
         {
             SetupConsoleWindow();
-            
-        //    ShowPetClass();
 
-          //  AwaitUserInput();
+            ShowPetClass();
+
+            AwaitUserInput();
 
             ShowTicketSellerClass();
 
             AwaitUserInput();
+
+
+            ShowAlbumClass();
+
+            AwaitUserInput();
+
+        }
+
+        private static void ShowAlbumClass()
+        {
+            Console.WriteLine("Starting the album program");
+
+            Album album = new();
+
+            album.Start();
+
         }
 
         private static void ShowTicketSellerClass()
@@ -55,6 +71,6 @@ namespace MyApp
 
     }
 
-   
+
 
 }
