@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
+﻿namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
 {
     internal class Album
     {
@@ -23,7 +15,6 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
 
         public void Start()
         {
-            
             ReadAlbumName();
             ReadArtistName();
             ReadTracks();
@@ -47,12 +38,10 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
 
         private void DisplayAlbumInfo()
         {
-
             Console.WriteLine($"\nAlbum Name: {albumName}" +
                 $"\nArtist/Band: {artistName}" +
                 $"\nNumberOfTracks: {numberOfTracks}" +
                 $"\nEnjoy Listening!");
-
         }
 
         private string ReadInput(string message)
@@ -70,19 +59,16 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
             }
 
             return userInput;
-
         }
 
         private int GetNumberInput(string message)
         {
-
             int parsedNumber = -1;
             bool isValidInt = false;
             string input = string.Empty;
 
             while (parsedNumber < 0)
             {
-
                 Console.WriteLine(message);
                 input = Console.ReadLine();
 
@@ -95,10 +81,8 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
                 }
                 else if (!isValidInt)
                 {
-
                     Console.WriteLine($"Your input {input} is not a valid number."
                         + $"\n Please enter your pet as a number");
-
                 }
                 else
                 {
@@ -107,6 +91,5 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
             }
             return parsedNumber;
         }
-
     }
 }

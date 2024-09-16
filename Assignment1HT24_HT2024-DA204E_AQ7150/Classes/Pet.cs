@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
+﻿namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
 {
     internal class Pet
     {
         private string name;
         private int age;
         private bool isFemale;
-
 
         public Pet(string name, int age, bool isFemale)
         {
@@ -26,13 +18,10 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
             age = -1;
             name = string.Empty;
             isFemale = false;
-
         }
 
         public void ReadAndSavePetData()
         {
-
-
             while (string.IsNullOrWhiteSpace(name))
             {
                 Console.WriteLine("What is the name of your pet?");
@@ -43,19 +32,14 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
                 }
             }
 
-
-
             try
             {
-
                 bool isValidInt = false;
                 string ageInput = string.Empty;
-
 
                 // Keep asking for age until a valid age is input ( >= 0 )
                 while (age < 0)
                 {
-
                     Console.WriteLine("What is the age of your pet?");
                     ageInput = Console.ReadLine();
 
@@ -68,7 +52,6 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
                     }
                     else if (!isValidInt)
                     {
-
                         Console.WriteLine($"Your input {ageInput} is not a valid number."
                             + $"\n Please enter your pet as a number");
                     }
@@ -76,13 +59,7 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
                     {
                         Console.WriteLine("Age cannot be negative. Please enter a valid age");
                     }
-
-
-
                 }
-
-
-
             }
             catch (Exception e)
             {
@@ -96,18 +73,12 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
                 Console.WriteLine("Is your pet female? (y/n): ");
                 genderInput = Console.ReadLine().Trim().ToLower();
 
-
                 if (genderInput != "y" && genderInput != "n")
                 {
-
                     Console.WriteLine("Invalid iput. Please enter either 'y' for female or 'n' for male\n");
                 }
             }
             isFemale = genderInput == "y";
-
-
-
-
         }
 
         public void DisplayPetInfo()
@@ -122,15 +93,10 @@ namespace Assignment1HT24_HT2024_DA204E_AQ7150.Classes
 
         public void Start()
         {
-
             Console.WriteLine("\nGreetings from the Pet class!\n");
 
             ReadAndSavePetData();
             DisplayPetInfo();
-
         }
-
-
-
     }
 }
