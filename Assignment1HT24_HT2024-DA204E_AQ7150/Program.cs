@@ -8,19 +8,42 @@ namespace MyApp
         static void Main(string[] args)
         {
             SetupConsoleWindow();
+            
+        //    ShowPetClass();
 
+          //  AwaitUserInput();
+
+            ShowTicketSellerClass();
+
+            AwaitUserInput();
+        }
+
+        private static void ShowTicketSellerClass()
+        {
+            Console.Title = "TicketSeller";
+
+            TicketSeller ticketSeller = new();
+
+            ticketSeller.Start();
+
+        }
+
+        private static void AwaitUserInput()
+        {
+            Console.WriteLine("Press enter to start the next part!");
+            Console.ReadLine();
+
+        }
+
+        private static void ShowPetClass()
+        {
             Console.Title = " My Favorite Pet ";
 
             Pet pet = new();
 
             pet.Start();
-
-
-            Console.WriteLine("Press enter to start the next part!");
-            Console.ReadLine();
-
-
         }
+
 
         private static void SetupConsoleWindow()
         {
