@@ -1,5 +1,4 @@
 ﻿using Assignment1HT24_HT2024_DA204E_AQ7150.Classes;
-using System;
 
 namespace MyApp
 {
@@ -7,20 +6,34 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            SetupConsoleWindow();
+            //SetupConsoleWindow();
 
-            ShowPetClass();
+            //ShowPetClass();
+
+            //AwaitUserInput();
+
+            //ShowTicketSellerClass();
+
+            //AwaitUserInput();
+
+
+            //ShowAlbumClass();
+
+            //AwaitUserInput();
+
+            ShowBookClass();
 
             AwaitUserInput();
 
-            ShowTicketSellerClass();
+        }
 
-            AwaitUserInput();
+        private static void ShowBookClass()
+        {
+            Console.WriteLine("Starting the Book Class Showcase");
 
+            Book book = new();
 
-            ShowAlbumClass();
-
-            AwaitUserInput();
+            book.Start();
 
         }
 
