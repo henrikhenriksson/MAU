@@ -26,56 +26,14 @@
 
         private void ReadInput()
         {
-            while (string.IsNullOrWhiteSpace(name))
-            {
-                Console.WriteLine("Your name please?");
-                name = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    Console.WriteLine("The name cannot be empty or just whitespace. Please enter a valid name.");
-                }
-            }
-            try
-            {
-                numberOfAdults = GetNumberInput("Number of adults?");
-                numberOfChildren = GetNumberInput("Number of children: ");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"A user input generated error has occurred: {e.Message}");
-            }
+
+           
+            name = Utility.ReadInput("Your name please?");
+            numberOfAdults = Utility.GetIntInput("Number of adults?");
+            numberOfChildren = Utility.GetIntInput("Number of children: ");
         }
 
-        private int GetNumberInput(string message)
-        {
-            int parsedNumber = -1;
-            bool isValidInt = false;
-            string input = string.Empty;
-
-            while (parsedNumber < 0)
-            {
-                Console.WriteLine(message);
-                input = Console.ReadLine();
-
-                isValidInt = int.TryParse(input, out parsedNumber);
-
-                if (isValidInt && parsedNumber >= 0)
-                {
-                    // Valid input
-                    return parsedNumber;
-                }
-                else if (!isValidInt)
-                {
-                    Console.WriteLine($"Your input {input} is not a valid number."
-                        + $"\n Please enter your pet as a number");
-                }
-                else
-                {
-                    Console.WriteLine("Age cannot be negative. Please enter a valid age");
-                }
-            }
-            return parsedNumber;
-        }
+        
 
         private void ShowResults()
         {
