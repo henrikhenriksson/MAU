@@ -38,7 +38,7 @@
             // Loop for as long as input is neither 'y' or 'n'
             while (genderInput != "y" && genderInput != "n")
             {
-                Console.WriteLine("Is your pet female? (y/n): ");
+                Console.Write("Is your pet female? (y/n): ");
                 genderInput = Console.ReadLine().Trim().ToLower();
 
                 if (genderInput != "y" && genderInput != "n")

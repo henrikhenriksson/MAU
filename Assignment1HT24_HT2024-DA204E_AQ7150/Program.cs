@@ -28,6 +28,8 @@ namespace MyApp
 
         private static void ShowBookClass()
         {
+            Console.Title = " My Book Discount";
+
             Console.WriteLine("Starting the Book Class Showcase");
 
             Book book = new();
@@ -38,6 +40,9 @@ namespace MyApp
 
         private static void ShowAlbumClass()
         {
+
+            Console.Title = " My Favorite Album ";
+
             Console.WriteLine("Starting the album program");
 
             Album album = new();
@@ -58,7 +63,7 @@ namespace MyApp
 
         private static void AwaitUserInput()
         {
-            Console.WriteLine("Press enter to start the next part!");
+            Console.WriteLine("\nPress enter to start the next part!\n");
             Console.ReadLine();
 
         }
