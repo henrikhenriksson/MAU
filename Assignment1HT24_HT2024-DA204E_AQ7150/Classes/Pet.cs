@@ -22,44 +22,11 @@
 
         public void ReadAndSavePetData()
         {
-            while (string.IsNullOrWhiteSpace(name))
-            {
-                Console.WriteLine("What is the name of your pet?");
-                name = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    Console.WriteLine("The name cannot be empty or just whitespace. Please enter a valid name.");
-                }
-            }
-
             try
             {
-                bool isValidInt = false;
-                string ageInput = string.Empty;
+                name = Utility.ReadInput("What is the name of your pet?");
+                age = Utility.GetIntInput("What is the age of your pet?", 0, 1000); // We assume no pet is older than 1000 years (how long do turtles live?)
 
-                // Keep asking for age until a valid age is input ( >= 0 )
-                while (age < 0)
-                {
-                    Console.WriteLine("What is the age of your pet?");
-                    ageInput = Console.ReadLine();
-
-                    isValidInt = int.TryParse(ageInput, out int parsedAge);
-
-                    if (isValidInt && parsedAge >= 0)
-                    {
-                        // Valid input
-                        age = parsedAge;
-                    }
-                    else if (!isValidInt)
-                    {
-                        Console.WriteLine($"Your input {ageInput} is not a valid number."
-                            + $"\n Please enter your pet as a number");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Age cannot be negative. Please enter a valid age");
-                    }
-                }
             }
             catch (Exception e)
             {
@@ -68,6 +35,7 @@
 
             string genderInput = string.Empty;
 
+            // Loop for as long as input is neither 'y' or 'n'
             while (genderInput != "y" && genderInput != "n")
             {
                 Console.WriteLine("Is your pet female? (y/n): ");

@@ -6,20 +6,19 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            //SetupConsoleWindow();
+            SetupConsoleWindow();
 
-            //ShowPetClass();
+            ShowPetClass();
 
-            //AwaitUserInput();
+            AwaitUserInput();
 
-            //ShowTicketSellerClass();
+            ShowTicketSellerClass();
 
-            //AwaitUserInput();
+            AwaitUserInput();
 
+            ShowAlbumClass();
 
-            //ShowAlbumClass();
-
-            //AwaitUserInput();
+            AwaitUserInput();
 
             ShowBookClass();
 
