@@ -35,7 +35,7 @@
                 $"\n+++ Author: {author} +++" +
                 $"\n+++ Original Price: {price} +++" +
                 $"\n+++ Book Age (Published {yearPublished}): {CalculateAge()} year(s) +++" +
-                $"\n+++ yearly discount based on age: {getDiscountRate(CalculateAge()):F2} +++" +
+                $"\n+++ yearly discount based on age: {getDiscountRate(CalculateAge())*100:F1} % +++" +
                 $"\n+++ Discounted price: {CalculateDiscount():F2} +++"
 
 
