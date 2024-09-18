@@ -1,5 +1,8 @@
 ﻿using Assignment1HT24_HT2024_DA204E_AQ7150.Classes;
 
+// Written by: Henrik Henriksson (AQ7150)
+
+
 namespace MyApp
 {
     static class Program
