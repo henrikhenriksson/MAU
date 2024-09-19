@@ -1,4 +1,4 @@
-﻿using RealEstateApp.Models.Interfaces;
+﻿using RealEstateApp.Models.AbstractClasses;
 using RealEstateApp.Models.SupportingClasses;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Models.ConcreteClasses
 {
-    internal class Warehouse : Commercial
+    internal class Hospital : Institutional
     {
-        public Warehouse(int id, Address address, double areal, int numberOfFloors, bool isIndustrial) : base(id, address, areal, numberOfFloors, isIndustrial)
+        public Hospital(int id, Address address, string institutionType, string numberOfDepartments, int maxCapacity) : base(id, address, institutionType, numberOfDepartments, maxCapacity)
         {
         }
 
