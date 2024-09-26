@@ -16,7 +16,7 @@ namespace RealEstateApp.Models.ConcreteClasses
                       Address address,
                       string institutionType,
                       string numberOfDepartments,
-                      int maxCapacity, string educationalStage) : base(id, address, institutionType, numberOfDepartments, maxCapacity)
+                      int maxCapacity, string educationalStage) : base(id, address, institutionType = "School", numberOfDepartments, maxCapacity)
         {
             EducationalStage = educationalStage;
         }
