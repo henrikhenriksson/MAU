@@ -10,13 +10,40 @@ namespace RealEstateApp.Models.ConcreteClasses
 {
     internal class Villa : Residential
     {
-        public Villa(int id, Address address, int numberOfRooms, double areal, bool hasGarden, bool hasGarage) : base(id, address, numberOfRooms, areal, hasGarden, hasGarage)
+
+
+        public double LotSize { get; set; }
+        public int ConstructionYear { get; set; }
+        public bool HasBasement { get; set; }
+
+        public Villa(int id, Address address, int numberOfRooms, double areal, bool hasGarden, bool hasGarage, int lotSize, int constructionYear, bool hasBasement) : base(id, address, numberOfRooms, areal, hasGarden, hasGarage)
         {
+            LotSize = LotSize;
+            ConstructionYear = constructionYear;
+            HasBasement = hasBasement;
         }
 
         public override void GetInfo()
         {
-            throw new NotImplementedException();
+            Console.Write(
+                $"Villa Info:" +
+                $"\nID: {ID}" +
+                $"\nAddress: {Address}" +
+                $"\nRooms: {NumberOfRooms}" +
+                $"\nGarage: {HasGarage}" +
+                $"\nGarden: {HasGarage}" +
+
+
+                $"\nConstructionYear: {ConstructionYear}" +
+
+
+                $"\nID: {ID}"
+
+
+
+
+
+                );
         }
     }
 }

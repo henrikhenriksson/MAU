@@ -10,6 +10,10 @@ namespace RealEstateApp.Models.ConcreteClasses
 {
     public class Apartment : Residential
     {
+
+        public int FloorNumber { get; set; }
+        public bool HasBalcony { get; set; }
+        
         public Apartment(int id,
                          Address address,
                          int floorNumber,
@@ -23,9 +27,7 @@ namespace RealEstateApp.Models.ConcreteClasses
             HasBalcony = hasBalcony;
         }
 
-        public int FloorNumber { get; set; }
-
-        public bool HasBalcony { get; set; }
+       
 
 
 
