@@ -24,19 +24,18 @@ namespace RealEstateApp.Models.ConcreteClasses
 
         }
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
-            Console.Write($"Warehouse Info:" +
-                $"\nID: {ID}" +
-                $"\nAddress: {Address}" +
-                $"\nAreal: {Areal}" +
-                $"\nProperties:" +
-                $"\nFloors: {NumberOfFloors}" +
-                $"\n Industrial: {IsIndustrial}" +
-                 $"\n StorageCapacity: {StorageCapacity}" +
-                  $"\n Loading Docks: {LoadingDocks}" +
-                   $"\n Cold Facilities: {HasFreezers}"
-                );
+            return $"Warehouse Info:\n" +
+                   $"ID: {ID}\n" +
+                   $"Address: {Address}\n" +
+                   $"Area: {Areal} sqm\n" +
+                   $"Properties:\n" +
+                   $"Floors: {NumberOfFloors}\n" +
+                   $"Industrial: {IsIndustrial}\n" +
+                   $"Storage Capacity: {StorageCapacity} cubic meters\n" +
+                   $"Loading Docks: {LoadingDocks}\n" +
+                   $"Cold Facilities (Freezers): {HasFreezers}";
         }
     }
 }

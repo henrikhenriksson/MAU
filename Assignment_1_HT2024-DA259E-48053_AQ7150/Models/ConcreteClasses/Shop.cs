@@ -18,17 +18,16 @@ namespace RealEstateApp.Models.ConcreteClasses
             this.TypeOfShop = typeOfShop;
         }
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
-            Console.WriteLine($"Shop Info:" +
-                $"\nID: {ID}" +
-                $"\nAddress: {Address}" +
-                $"\nAreal: {Areal}" +
-                $"\nProperties:" +
-                $"\nFloors: {NumberOfFloors}" +
-                $"\n Industrial: {IsIndustrial}" +
-                $"\n TypeofShop: {TypeOfShop}");
-
+            return $"Shop Info:\n" +
+                   $"ID: {ID}\n" +
+                   $"Address: {Address}\n" +
+                   $"Area: {Areal} sqm\n" +
+                   $"Properties:\n" +
+                   $"Floors: {NumberOfFloors}\n" +
+                   $"Industrial: {IsIndustrial}\n" +
+                   $"Type of Shop: {TypeOfShop}";
         }
     }
 }

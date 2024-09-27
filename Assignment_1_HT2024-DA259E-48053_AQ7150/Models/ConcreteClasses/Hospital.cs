@@ -22,9 +22,16 @@ namespace RealEstateApp.Models.ConcreteClasses
 
 
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
-            throw new NotImplementedException();
+            return $"Hospital Info:\n" +
+                   $"ID: {ID}\n" +
+                   $"Address: {Address}\n" +
+                   $"Institution type: {InstitutionType}\n" +
+                   $"Departments: {NumberOfDepartments}\n" +
+                   $"Capacity: {MaxCapacity}\n" +
+                   $"Has Emergency Ward: {HasEmergencyWard}\n" +
+                   $"Research Facilities: {PerformsResearch}";
         }
     }
 }

@@ -27,16 +27,16 @@ namespace RealEstateApp.Models.ConcreteClasses
 
         }
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
-            Console.WriteLine($"University Info:" +
-                $"\nID: {ID}" +
-                $"\nAddress: {Address}" +
-                $"\nInstitution type: {InstitutionType}" +
-                $"\nDegree Programs: {UniversityPrograms}" +
-                $"\nResearch Facilities: {PerformsResearch}" +
-                $"Departments: {NumberOfDepartments}" +
-                $"Capacity: {MaxCapacity}");
+            return $"University Info:\n" +
+                   $"ID: {ID}\n" +
+                   $"Address: {Address}\n" +
+                   $"Institution type: {InstitutionType}\n" +
+                   $"Degree Programs: {UniversityPrograms}\n" +
+                   $"Research Facilities: {PerformsResearch}\n" +
+                   $"Departments: {NumberOfDepartments}\n" +
+                   $"Capacity: {MaxCapacity}";
         }
     }
 }

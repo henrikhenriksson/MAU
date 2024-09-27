@@ -21,16 +21,16 @@ namespace RealEstateApp.Models.ConcreteClasses
             EducationalStage = educationalStage;
         }
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
 
-            Console.WriteLine($"School Info:" +
-                $"\nID: {ID}" +
-                $"\nAddress: {Address}" +
-                $"\nInstitution type: {InstitutionType}" +
-                $"\nEducational Stage: {EducationalStage}" +
-                $"Departments: {NumberOfDepartments}" +
-                $"Capacity: {MaxCapacity}");
+            return $"School Info:\n" +
+                 $"ID: {ID}\n" +
+                 $"Address: {Address}\n" +
+                 $"Institution type: {InstitutionType}\n" +
+                 $"Educational Stage: {EducationalStage}\n" +
+                 $"Departments: {NumberOfDepartments}\n" +
+                 $"Capacity: {MaxCapacity}";
 
         }
     }
