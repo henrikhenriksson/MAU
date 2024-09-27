@@ -11,7 +11,7 @@ namespace RealEstateApp.Models.Interfaces
     {
         int ID { get; set; }
         Address Address { get; }
-        void GetInfo();
+        string GetInfo();
 
     }
 }

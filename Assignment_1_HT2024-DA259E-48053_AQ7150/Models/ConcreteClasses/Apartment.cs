@@ -33,17 +33,15 @@ namespace RealEstateApp.Models.ConcreteClasses
 
         public override void GetInfo()
         {
-            Console.WriteLine($"Apartment Info:" +
-                $"\nID: {ID}" +
-                $"\nAddress: {Address}" +
-                $"\nRooms: {NumberOfRooms}" +
-                $"\nArea: {Areal}" +
-                $"\nFloor Number: {FloorNumber}" +
-                $"\nProperties: " +
-                $"\nGarden : {HasGarden}" +
-                $"\nGarage: {HasGarage}" +
-                $"\nBalcony: {HasBalcony}"
-                );
+            return $"Apartment Info:\n" +
+               $"ID: {ID}\n" +
+               $"Address: {Address}\n" +
+               $"Rooms: {NumberOfRooms}\n" +
+               $"Area: {Areal} sqm\n" +
+               $"Floor Number: {FloorNumber}\n" +
+               $"Has Garden: {HasGarden}\n" +
+               $"Has Garage: {HasGarage}\n" +
+               $"Has Balcony: {HasBalcony}";
 
         }
     }

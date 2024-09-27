@@ -13,7 +13,16 @@ namespace RealEstateApp.Models.ConcreteClasses
         public string LeasePeriod { get; set; }
 
 
-        public Rental(int id, Address address, int floorNumber, int numberOfRooms, double areal, bool hasGarden, bool hasGarage, bool hasBalcony, double rent, string leasePeriod) : base(id, address, floorNumber, numberOfRooms, areal, hasGarden, hasGarage, hasBalcony)
+        public Rental(int id,
+                      Address address,
+                      int floorNumber,
+                      int numberOfRooms,
+                      double areal,
+                      bool hasGarden,
+                      bool hasGarage,
+                      bool hasBalcony,
+                      double rent,
+                      string leasePeriod) : base(id, address, floorNumber, numberOfRooms, areal, hasGarden, hasGarage, hasBalcony)
         {
             Rent = rent;
             LeasePeriod = leasePeriod;

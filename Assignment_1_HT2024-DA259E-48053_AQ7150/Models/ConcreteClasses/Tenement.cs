@@ -20,5 +20,17 @@ namespace RealEstateApp.Models.ConcreteClasses
             HousingCooperative = housingCooperative;
 
         }
+
+
+        public override string GetInfo()
+        {
+            // Call base class GetInfo to get common Apartment info
+            string baseInfo = base.GetInfo();
+
+            // Append Tenement-specific information
+            return baseInfo +
+                   $"\nMonthly Fee: {MonthlyFee:C}" +
+                   $"\nHousing Cooperative: {HousingCooperative}";
+        }
     }
 }
