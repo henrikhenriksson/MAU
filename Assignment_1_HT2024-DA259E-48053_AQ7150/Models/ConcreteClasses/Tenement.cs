@@ -14,7 +14,16 @@ namespace RealEstateApp.Models.ConcreteClasses
 
       
 
-        public Tenement(int id, Address address, int floorNumber, int numberOfRooms, double areal, bool hasGarden, bool hasGarage, bool hasBalcony, int monthlyFee, string housingCooperative) : base(id, address, floorNumber, numberOfRooms, areal, hasGarden, hasGarage, hasBalcony)
+        public Tenement(int id,
+                        Address address,
+                        int floorNumber,
+                        int numberOfRooms,
+                        double areal,
+                        bool hasGarden,
+                        bool hasGarage,
+                        bool hasBalcony,
+                        int monthlyFee,
+                        string housingCooperative) : base(id, address, numberOfRooms, areal, hasGarden, hasGarage, hasBalcony)
         {
             MonthlyFee = monthlyFee;
             HousingCooperative = housingCooperative;

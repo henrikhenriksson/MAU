@@ -22,7 +22,7 @@ namespace RealEstateApp.Models.ConcreteClasses
                       bool hasGarage,
                       bool hasBalcony,
                       double rent,
-                      string leasePeriod) : base(id, address, floorNumber, numberOfRooms, areal, hasGarden, hasGarage, hasBalcony)
+                      string leasePeriod) : base(id, address, numberOfRooms, areal, hasGarden, hasGarage, hasBalcony)
         {
             Rent = rent;
             LeasePeriod = leasePeriod;

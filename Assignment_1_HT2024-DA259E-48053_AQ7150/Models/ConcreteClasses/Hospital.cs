@@ -12,8 +12,14 @@ namespace RealEstateApp.Models.ConcreteClasses
     {
 
         public bool HasEmergencyWard { get; set; }
-        public int PerformsResearch { get; set; }
-        public Hospital(int id, Address address, string institutionType, string numberOfDepartments, int maxCapacity, bool hasEmergencyWard, int performsResearch) : base(id, address, institutionType, numberOfDepartments, maxCapacity)
+        public bool PerformsResearch { get; set; }
+        public Hospital(int id,
+                        Address address,
+                        string institutionType,
+                        string numberOfDepartments,
+                        int maxCapacity,
+                        bool hasEmergencyWard,
+                        bool performsResearch) : base(id, address, institutionType, numberOfDepartments, maxCapacity)
         {
             HasEmergencyWard = hasEmergencyWard;
             PerformsResearch = performsResearch;
