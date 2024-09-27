@@ -28,7 +28,7 @@ namespace RealEstateApp.Models.ConcreteClasses
         public override string GetInfo()
         {
             return base.GetInfo() +
-                   $"\nHas Shared Walls: {HasSharedGarage}";
+                   $"\nHas Shared Garage: {HasSharedGarage}";
         }
     }
 

@@ -28,12 +28,15 @@ namespace RealEstateApp.Models.ConcreteClasses
             LeasePeriod = leasePeriod;
         }
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
-            base.GetInfo(); // Call base class GetInfo to print common Apartment info
-            Console.Write($"Monthly Rent: {Rent:C}" +
-                $" Lease Period: {LeasePeriod}"
-                );
+            // Call base class GetInfo to get common Apartment info
+            string baseInfo = base.GetInfo();
+
+            // Append Rental-specific information
+            return baseInfo +
+                   $"\nMonthly Rent: {Rent:C}" +
+                   $"\nLease Period: {LeasePeriod}";
         }
 
     }

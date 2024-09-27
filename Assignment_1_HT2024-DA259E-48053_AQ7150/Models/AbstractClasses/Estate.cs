@@ -20,7 +20,7 @@ namespace RealEstateApp.Models.AbstractClasses
             Address = address;
         }
 
-        public abstract void GetInfo();
+        public abstract string GetInfo();
 
     }
 }

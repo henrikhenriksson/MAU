@@ -31,7 +31,7 @@ namespace RealEstateApp.Models.ConcreteClasses
 
 
 
-        public override void GetInfo()
+        public override string GetInfo()
         {
             return $"Apartment Info:\n" +
                $"ID: {ID}\n" +
