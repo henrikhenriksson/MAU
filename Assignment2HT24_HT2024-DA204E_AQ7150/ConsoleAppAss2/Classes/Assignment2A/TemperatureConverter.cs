@@ -54,8 +54,17 @@ namespace ConsoleAppAss2.Classes.Assignment2A
 
         private void ConvertFahrenheitToCelsius()
         {
-            // formula: C = 5/9 *(F - 32)
+            const int fahrenHeitMax = 212;
+            const int interval = 10; 
 
+            // formula: C = 5/9 *(F - 32)
+            Console.WriteLine("\nFahrenHeit to Celsius conversion table:");
+
+            for (int fahrenheit = 0; fahrenheit < fahrenHeitMax; fahrenheit += interval)
+            {
+                double celsius = 5.0 / 9.0 * (fahrenheit - 32);
+                Console.WriteLine($"{fahrenheit} F = {celsius}C");
+            }
 
         }
 
@@ -63,6 +72,17 @@ namespace ConsoleAppAss2.Classes.Assignment2A
 
         private void ConvertCelsiusToFahrenheit()
         {
+            const int celsiusMax = 100;
+            const int interval = 5;
+            Console.WriteLine("\nCelsius to Fahrenheit conversion table:");
+
+            for (int celsius = 0; celsius < celsiusMax; celsius+=interval)
+            {
+                double fahrenheit = 9.0 / 5.0 * celsius + 32;
+                Console.WriteLine($"{celsius} C = {fahrenheit} F");
+            }
+
+
             // formula: F = 9/5 * C + 32
 
         }
