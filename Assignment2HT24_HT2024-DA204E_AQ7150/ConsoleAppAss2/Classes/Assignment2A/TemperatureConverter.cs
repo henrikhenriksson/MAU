@@ -1,6 +1,5 @@
 ﻿// Written by: Henrik Henriksson (AQ7150)  
 
-
 using System.Numerics;
 
 namespace ConsoleAppAss2.Classes.Assignment2A
@@ -11,6 +10,7 @@ namespace ConsoleAppAss2.Classes.Assignment2A
         // Entrance point
         public void Start()
         {
+            // do while to ensure at least one execution of the menu.
 
             int choice;
             do
@@ -47,23 +47,25 @@ namespace ConsoleAppAss2.Classes.Assignment2A
             }
             while (choice != 0);
 
-
-
-
         }
 
         private void ConvertFahrenheitToCelsius()
         {
-            const int fahrenHeitMax = 212;
-            const int interval = 10; 
+
+            // avoid magic numbers and allow for easier scaling etc.
+            const int fahrenHeitMax = 220;
+            const int interval = 10;
 
             // formula: C = 5/9 *(F - 32)
             Console.WriteLine("\nFahrenHeit to Celsius conversion table:");
 
-            for (int fahrenheit = 0; fahrenheit < fahrenHeitMax; fahrenheit += interval)
+            for (int fahrenheit = 0; fahrenheit <= fahrenHeitMax; fahrenheit += interval)
             {
+                // Math round and padding probably doing the same thing here.
                 double celsius = Math.Round((5.0 / 9.0) * (fahrenheit - 32), 2);
-                Console.WriteLine($"{fahrenheit} F = {celsius}C");
+                string fText = $"{fahrenheit,-3} F".PadRight(15);
+                string cText = $"{celsius,-6:F2} C".PadRight(3);
+                Console.WriteLine(fText + cText);
             }
 
         }
@@ -72,18 +74,21 @@ namespace ConsoleAppAss2.Classes.Assignment2A
 
         private void ConvertCelsiusToFahrenheit()
         {
+            // formula: F = 9/5 * C + 32
             const int celsiusMax = 100;
             const int interval = 5;
             Console.WriteLine("\nCelsius to Fahrenheit conversion table:");
 
-            for (int celsius = 0; celsius < celsiusMax; celsius+=interval)
+            for (int celsius = 0; celsius <= celsiusMax; celsius+=interval)
             {
                 double fahrenheit = Math.Round((9.0 / 5.0) * celsius + 32);
-                Console.WriteLine($"{celsius} C = {fahrenheit} F");
+                string cText = $"{celsius,-3} C".PadRight(15);
+                string fText = $"{fahrenheit,-6:F2} F".PadRight(3);
+                Console.WriteLine (cText + fText);
             }
 
 
-            // formula: F = 9/5 * C + 32
+          
 
         }
 
@@ -91,7 +96,7 @@ namespace ConsoleAppAss2.Classes.Assignment2A
         {
 
             int choice = -1;
-
+            // ensure only 0, 1 and 2 are valid options, loop until valid response given.
             while (!int.TryParse(Console.ReadLine(), out choice)
                 || choice < 0
                 || choice > 2)

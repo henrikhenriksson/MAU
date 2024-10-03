@@ -5,6 +5,11 @@ using ConsoleAppAss2.Classes.Assignment2A;
 
 Console.WriteLine("Starting Application");
 
-TemperatureConverter temperatureConverter = new();
+//TemperatureConverter temperatureConverter = new();
 
-temperatureConverter.Start();
+//temperatureConverter.Start();
+
+
+Console.WriteLine($"\nPress Enter for the next Part of the Assignment";
+Console.ReadLine();
+
