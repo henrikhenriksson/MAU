@@ -8,7 +8,11 @@ namespace ConsoleAppAss2.Classes.Assignment2C
 {
     internal class MathWork
     {
-        public void Start() { }
+        public void Start() {
+
+            Console.Title = "Math Works!";
+            Calculate();
+        }
 
         private void Calculate()
         {
@@ -18,15 +22,29 @@ namespace ConsoleAppAss2.Classes.Assignment2C
             {
                 do
                 {
-                    int start = Utility.GetIntInput("Enter a starting Integer (or 'x' to Exit");
-                    int end = Utility.GetIntInput("Enter an Ending Integer (or 'x' to exit)", start); // the end should not be bigger than the start
+                    int firstEntry = Utility.GetIntInput("Enter a starting Integer: ");
+                    int secondEntry = Utility.GetIntInput("Enter an Ending Integer:");
+
+                    int start;
+                    int end;
+
+                    if(firstEntry < secondEntry)
+                    {
+                        start = firstEntry;
+                        end = secondEntry;
+                    } else
+                    {
+                        start = secondEntry;
+                        end = firstEntry;
+                    }
+                     
 
 
+                    Console.WriteLine("\n+++++ Summation of  your numbers +++++");
+                    Console.WriteLine($"\nThe sum of numbers from {start} to {end} is: {SumNumbers(start, end)}");
 
-                    Console.WriteLine("+++++ Summation of  your numbers +++++");
-                    Console.WriteLine($"The sum of numbers from {start} to {end} is: {SumNumbers(start, end)}");
-
-
+                    PrintEvenNumbers(start, end);
+                    PrintOddNumbers(start, end);
 
                     continueRunning = ExitCalculation();
                 }
@@ -37,7 +55,7 @@ namespace ConsoleAppAss2.Classes.Assignment2C
 
         private bool ExitCalculation()
         {
-            string userInput = Utility.ReadInput("Press 'x' to exit or any key to continue");
+            string userInput = Utility.ReadInput("\nPress 'x' to exit or any letter key to continue");
             return !userInput.Equals("x", StringComparison.CurrentCultureIgnoreCase); // return false
         }
 
@@ -59,37 +77,62 @@ namespace ConsoleAppAss2.Classes.Assignment2C
                 Console.WriteLine($"No even numbers found in the range: {num1} to {num2}");
                 return;
             }
+            PrintNumbersInRows(evenNumbers, 12, $"Even numbers in the range {num1} to {num2}");
+
+        }
+
+        private void printMultiplicationTable() { }
+
+        private void PrintOddNumbers(int num1, int num2)
+        {
+
+            List<int> oddNumbers = new List<int>();
+
+            for (int i = num1; i <= num2; i++)
+            {
+                if (i % 2 != 0) // add if there is a remainder
+                {
+                    oddNumbers.Add(i);
+                }
+            }
+
+            if (oddNumbers.Count < 1)
+            {
+                Console.WriteLine($"No odd numbers found in the range: {num1} to {num2}");
+                return;
+
+            }
+
+            PrintNumbersInRows(oddNumbers, 12, $"Odd numbers in the range {num1} to {num2}");
 
 
-            Console.WriteLine($"++++++ Even numbers in the range {num1} to {num2}+++++");
+        }
 
-            const int entriesPerRow = 12;
+        // this method is extracted to perform printing for the two number printing methods.
+        private void PrintNumbersInRows(List<int> numbers, int entriesPerRow, string message)
+        {
+
             int currentEntry = 0;
 
+            Console.WriteLine($"\n+++++ {message} +++++");
 
-            // print each even number in the list
-            foreach (int evenNumber in evenNumbers)
+            foreach (var number in numbers)
             {
-
-                Console.Write($"{evenNumber,-5} ");
+                Console.Write($"{number,-10}");
 
                 currentEntry++;
 
-                // print new line and reset counter
-                if(currentEntry >= entriesPerRow)
+                if (currentEntry >= entriesPerRow)
                 {
                     Console.WriteLine();
                     currentEntry = 0;
                 }
 
             }
-
+            Console.WriteLine();
 
         }
 
-        private void printMultiplicationTable() { }
-
-        private void PrintOddNumbers(int num1, int num2) { }
 
         private int SumNumbers(int start, int end)
         {
