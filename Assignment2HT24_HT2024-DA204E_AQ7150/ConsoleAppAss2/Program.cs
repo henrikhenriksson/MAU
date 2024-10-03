@@ -1,8 +1,10 @@
 ﻿// Written by: Henrik Henriksson (AQ7150)
 
 
+using ConsoleAppAss2.Classes;
 using ConsoleAppAss2.Classes.Assignment2A;
 using ConsoleAppAss2.Classes.Assignment2B;
+using ConsoleAppAss2.Classes.Assignment2C;
 
 Console.WriteLine("Starting Application");
 
@@ -11,13 +13,16 @@ Console.WriteLine("Starting Application");
 //temperatureConverter.Start();
 
 
-Console.WriteLine("Press Enter for the next part");
-Console.ReadLine();
+Utility.AwaitUserInput();
 
 
-StringFunctions stringFunctions = new();
+//StringFunctions stringFunctions = new();
 
-stringFunctions.Start();
+//stringFunctions.Start();
 
-Console.WriteLine("Press Enter for the next part");
-Console.ReadLine();
+Utility.AwaitUserInput();
+
+MathWork mathWork = new();
+mathWork.Start();
+
+Utility.AwaitUserInput();

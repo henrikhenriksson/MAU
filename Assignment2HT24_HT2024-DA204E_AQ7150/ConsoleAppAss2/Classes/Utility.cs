@@ -68,5 +68,12 @@ namespace ConsoleAppAss2.Classes
             return userInput;
         }
 
+        public static void AwaitUserInput()
+        {
+            Console.WriteLine("Press Enter for the next part");
+            Console.ReadLine();
+
+        }
+
     }
 }
