@@ -2,6 +2,7 @@
 
 
 using ConsoleAppAss2.Classes.Assignment2A;
+using ConsoleAppAss2.Classes.Assignment2B;
 
 Console.WriteLine("Starting Application");
 
@@ -10,6 +11,13 @@ Console.WriteLine("Starting Application");
 //temperatureConverter.Start();
 
 
-Console.WriteLine($"\nPress Enter for the next Part of the Assignment";
+Console.WriteLine("Press Enter for the next part");
 Console.ReadLine();
 
+
+StringFunctions stringFunctions = new();
+
+stringFunctions.Start();
+
+Console.WriteLine("Press Enter for the next part");
+Console.ReadLine();
