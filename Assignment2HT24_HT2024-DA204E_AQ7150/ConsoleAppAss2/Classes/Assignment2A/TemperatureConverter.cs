@@ -62,7 +62,7 @@ namespace ConsoleAppAss2.Classes.Assignment2A
 
             for (int fahrenheit = 0; fahrenheit < fahrenHeitMax; fahrenheit += interval)
             {
-                double celsius = 5.0 / 9.0 * (fahrenheit - 32);
+                double celsius = Math.Round((5.0 / 9.0) * (fahrenheit - 32), 2);
                 Console.WriteLine($"{fahrenheit} F = {celsius}C");
             }
 
@@ -78,7 +78,7 @@ namespace ConsoleAppAss2.Classes.Assignment2A
 
             for (int celsius = 0; celsius < celsiusMax; celsius+=interval)
             {
-                double fahrenheit = 9.0 / 5.0 * celsius + 32;
+                double fahrenheit = Math.Round((9.0 / 5.0) * celsius + 32);
                 Console.WriteLine($"{celsius} C = {fahrenheit} F");
             }
 
