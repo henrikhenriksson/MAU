@@ -8,7 +8,8 @@ namespace ConsoleAppAss2.Classes.Assignment2C
 {
     internal class MathWork
     {
-        public void Start() {
+        public void Start()
+        {
 
             Console.Title = "Math Works!";
             Calculate();
@@ -28,16 +29,17 @@ namespace ConsoleAppAss2.Classes.Assignment2C
                     int start;
                     int end;
 
-                    if(firstEntry < secondEntry)
+                    if (firstEntry < secondEntry)
                     {
                         start = firstEntry;
                         end = secondEntry;
-                    } else
+                    }
+                    else
                     {
                         start = secondEntry;
                         end = firstEntry;
                     }
-                     
+
 
 
                     Console.WriteLine("\n+++++ Summation of  your numbers +++++");
@@ -46,12 +48,36 @@ namespace ConsoleAppAss2.Classes.Assignment2C
                     PrintEvenNumbers(start, end);
                     PrintOddNumbers(start, end);
 
+                    CalculateSquareRoots(start, end);
+
                     continueRunning = ExitCalculation();
                 }
                 while (continueRunning);
             }
         }
-        private void CalculateSquareRoots(int num1, int num2) { }
+        private void CalculateSquareRoots(int num1, int num2)
+        {
+
+            Console.WriteLine("+++++ Square Roots +++++");
+
+
+            // outer loop prints a row
+            for (int i = num1; i <= num2; i++)
+            {
+                string resultRow = string.Empty; // this string will hold the accumulated sqrts
+
+                for (int j = i; j <= num2; j++)
+                {
+                    double sqrt = Math.Sqrt(j);
+
+                    resultRow += $"{sqrt:F2}\t";
+                }
+                Console.WriteLine($"Sqrt({i} to {num2,-3})\t{resultRow.Trim()}");
+            }
+
+
+
+        }
 
         private bool ExitCalculation()
         {
@@ -81,7 +107,12 @@ namespace ConsoleAppAss2.Classes.Assignment2C
 
         }
 
-        private void printMultiplicationTable() { }
+        private void printMultiplicationTable()
+        {
+            // I'm leaving this method out as it seems to have been omitted from the instructions.
+            throw new NotImplementedException();
+
+        }
 
         private void PrintOddNumbers(int num1, int num2)
         {
