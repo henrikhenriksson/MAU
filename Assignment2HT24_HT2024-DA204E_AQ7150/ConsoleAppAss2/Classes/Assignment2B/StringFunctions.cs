@@ -13,7 +13,7 @@ namespace ConsoleAppAss2.Classes.Assignment2B
         public void Start()
         {
 
-            bool continueRunning = false;
+            bool continueRunning = true;
 
             do
             {
@@ -42,7 +42,7 @@ namespace ConsoleAppAss2.Classes.Assignment2B
             while (true)
             { // run forever until a valid input is read
 
-                string input = Utility.ReadInput("\nWould you like to continue running this program?");
+                string input = Utility.ReadInput("\n\nWould you like to continue running this program?");
                 if (input.ToLower() == "y")
                 {
                     return true;
