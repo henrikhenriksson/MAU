@@ -15,8 +15,7 @@ namespace ConsoleAppAss2.Classes.Assignment2C
         {
             bool continueRunning = true;
 
-            if (continueRunning)
-            {
+            
                 do
                 {
                     int firstEntry = Utility.GetIntInput("Enter a starting Integer: ");
@@ -49,7 +48,7 @@ namespace ConsoleAppAss2.Classes.Assignment2C
                     continueRunning = ExitCalculation();
                 }
                 while (continueRunning);
-            }
+            
         }
         private void CalculateSquareRoots(int num1, int num2)
         {
