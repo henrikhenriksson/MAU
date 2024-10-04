@@ -10,8 +10,9 @@ namespace ConsoleAppAss2.Classes.Assignment2A
         // Entrance point
         public void Start()
         {
-            // do while to ensure at least one execution of the menu.
+            Console.Title = "Temperature Converter (Assignment2A)";
 
+            // do while to ensure at least one execution of the menu.
             int choice;
             do
             {
@@ -23,6 +24,9 @@ namespace ConsoleAppAss2.Classes.Assignment2A
                 switch (choice)
                 {
 
+                    case 0:
+                        Console.WriteLine("Exiting Program");
+                        break;
                     case 1:
 
                         ConvertFahrenheitToCelsius();
@@ -31,9 +35,7 @@ namespace ConsoleAppAss2.Classes.Assignment2A
                     case 2:
                         ConvertCelsiusToFahrenheit();
                         break;
-                    case 3:
-                        Console.WriteLine("Exiting Program");
-                        break;
+                    
                     default:
                         Console.WriteLine("Invalid Selection, please choose 1,2 or 0 to quit");
                         break;
