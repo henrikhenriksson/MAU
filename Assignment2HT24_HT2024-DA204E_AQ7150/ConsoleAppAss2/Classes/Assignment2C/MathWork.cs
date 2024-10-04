@@ -45,7 +45,7 @@ namespace ConsoleAppAss2.Classes.Assignment2C
 
                     CalculateSquareRoots(start, end);
 
-                    continueRunning = ExitCalculation();
+                    continueRunning = GetExitCalculation();
                 }
                 while (continueRunning);
             
@@ -74,7 +74,7 @@ namespace ConsoleAppAss2.Classes.Assignment2C
 
         }
 
-        private bool ExitCalculation()
+        private bool GetExitCalculation()
         {
             string userInput = Utility.ReadInput("\nPress 'x' to exit or any letter key to continue");
             return !userInput.Equals("x", StringComparison.CurrentCultureIgnoreCase); // return false
