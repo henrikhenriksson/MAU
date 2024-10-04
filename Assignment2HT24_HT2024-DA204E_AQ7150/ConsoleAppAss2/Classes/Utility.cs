@@ -14,7 +14,7 @@ namespace ConsoleAppAss2.Classes
             while (!isValid)
             {
                 Console.Write($"{message} : ");
-                string input = Console.ReadLine();
+                string? input = Console.ReadLine();
 
                 if (int.TryParse(input, out inputValue) && inputValue >= min && inputValue <= max)
                 {
@@ -37,7 +37,7 @@ namespace ConsoleAppAss2.Classes
             while (!isValid)
             {
                 Console.Write($"{message} : ");
-                string input = Console.ReadLine();
+                string? input = Console.ReadLine();
 
                 if (double.TryParse(input, out inputValue) && inputValue >= 0)
                 {
@@ -70,7 +70,7 @@ namespace ConsoleAppAss2.Classes
 
         public static void AwaitUserInput()
         {
-            Console.WriteLine("Press Enter for the next part");
+            Console.WriteLine("Press Enter to continue");
             Console.ReadLine();
 
         }
