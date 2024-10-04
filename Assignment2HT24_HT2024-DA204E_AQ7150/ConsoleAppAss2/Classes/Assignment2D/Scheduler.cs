@@ -1,20 +1,41 @@
 ﻿// Written by: Henrik Henriksson (AQ7150)
 
 
+using System.Numerics;
+
 namespace ConsoleAppAss2.Classes.Assignment2D
 {
     internal class Scheduler
     {
-        private const int WeeksInYear = 52;
-        private List<int> WeekendShiftWeeks = new List<int>();
-        private List<int> NightShiftWeeks = new List<int>();
+        private readonly List<int> WeeksInYear = new();
 
+        public Scheduler()
+        {
+
+            // fill the list with 52 indexes
+            for (int week = 1; week <= 52; week++)
+            {
+                WeeksInYear.Add(week);
+
+            }
+        }
+
+        private List<int> GetShiftWeeks(int startWeek, int interval)
+        {
+            List<int> shiftWeeks = new List<int>();
+
+            for (int week = startWeek; week <= WeeksInYear.Count; week += interval)
+            {
+                shiftWeeks.Add(week);
+            }
+
+            return shiftWeeks;
+        }
 
         // Entry point
         public void Run()
         {
-            GenerateShiftWeekends();
-            GenerateShiftNights();
+
 
             bool continueRunning = true;
 
@@ -31,18 +52,27 @@ namespace ConsoleAppAss2.Classes.Assignment2D
                     break;
                 }
 
+                int weekendStartWeek = 2;
+                int weekendInterval = 2;
+
+                int nightStartWeek = 2;
+                int nightInterval = 4;
+
+
+
                 switch (selection)
                 {
                     case 1:
-                        displaySchedule("Weekend");
+
+                        DisplaySchedule("Weekend", weekendStartWeek, weekendInterval);
                         break;
 
                     case 2:
-                        displaySchedule("Night");
+                        DisplaySchedule("Night", nightStartWeek, nightInterval);
                         break;
 
                     default:
-                        Console.WriteLine("Invalid Selection!")
+                        Console.WriteLine("Invalid Selection!");
                         break;
                 }
 
@@ -51,8 +81,26 @@ namespace ConsoleAppAss2.Classes.Assignment2D
             while (continueRunning);
 
         }
+        // Tuples is an awesome concept!
+        private (int startWeek, int interval) ConfigParameters(string shiftType, int defaultStartweek, int defaultInterval)
+        {
+
+            Console.WriteLine($"\nConfig {shiftType} parameters");
+
+            Console.Write($"Enter a start week for {shiftType} shifts, default is: {defaultStartweek}");
+            string startWeekInput = Console.ReadLine();
+
+            int startWeek = string.IsNullOrWhiteSpace(startWeekInput) ? defaultStartweek : int.Parse(startWeekInput);
+
+            Console.Write($"Enter an interval for {shiftType} shifts, default is: {defaultInterval}");
+
+            string intervalInput = Console.ReadLine();
+            int interval = string.IsNullOrWhiteSpace(intervalInput) ? defaultInterval : int.Parse(intervalInput);   
+
+            return (startWeek, interval);
 
 
+        }
 
         private void PresentMenuOptions()
         {
@@ -63,37 +111,25 @@ namespace ConsoleAppAss2.Classes.Assignment2D
             Console.WriteLine("--------------------------------------");
 
             Console.WriteLine("\nMenu Options: ");
-            Console.WriteLine("1. Show a list of the weekends to work");
-            Console.WriteLine("2. Show a list of the nights to work");
+            Console.WriteLine("1. Config and Show a list of the weekends to work");
+            Console.WriteLine("2. Config and Show a list of the nights to work");
         }
 
-        private void GenerateShiftNights()
-        {
-            // Night shifts increment of 4 starting first week
-            for (int week = 1; week <= WeeksInYear; week += 4)
-            {
-                NightShiftWeeks.Add(week);
-            }
 
-        }
 
-        private void GenerateShiftWeekends()
-        {
-
-            // Weekendshifts based on an increment of 2 for every other weekend
-            for (int week = 2; week <= WeeksInYear; week += 2)
-            {
-                WeekendShiftWeeks.Add(week);
-            }
-        }
-
-        private void displaySchedule(string shiftType)
+        private void DisplaySchedule(string shiftType, int startWeek, int interval)
         {
             // select corresponding List based on user selection
-            List<int> scheduledWeeksToDislplay = shiftType == "WeekendSched" ? WeekendShiftWeeks : NightShiftWeeks;
+            List<int> scheduledWeeksToDislplay = GetShiftWeeks(startWeek, interval);
 
+            Console.WriteLine($"\n+++++ {shiftType} Weeks +++++");
 
+            foreach (var week in scheduledWeeksToDislplay)
+            {
+                Console.WriteLine($"{week}");
+            }
 
+            Console.WriteLine();
         }
 
 
