@@ -9,29 +9,19 @@ using ConsoleAppAss2.Classes.Assignment2D;
 
 Console.WriteLine("Starting Application");
 
-//TemperatureConverter temperatureConverter = new();
-
-//temperatureConverter.Start();
-
-
-//Utility.AwaitUserInput();
-
-
-//StringFunctions stringFunctions = new();
-
-//stringFunctions.Start();
-
-//Utility.AwaitUserInput();
-
-//MathWork mathWork = new();
-//mathWork.Start();
-
+TemperatureConverter temperatureConverter = new();
+temperatureConverter.Start();
 Utility.AwaitUserInput();
 
-Scheduler scheduler = new();
 
-scheduler.Run();
+StringFunctions stringFunctions = new();
+stringFunctions.Start();
+Utility.AwaitUserInput();
 
+MathWork mathWork = new();
+mathWork.Start();
+Utility.AwaitUserInput();
 
-Console.WriteLine("All programs have been run. Press enter to exit the program");
-Console.ReadLine();
+//Scheduler scheduler = new();
+//scheduler.Run();
+//Utility.AwaitUserInput();
