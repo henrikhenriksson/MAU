@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Written by: Henrik Henriksson (AQ7150)
+
 
 namespace ConsoleAppAss2.Classes.Assignment2D
 {
@@ -22,21 +19,40 @@ namespace ConsoleAppAss2.Classes.Assignment2D
             bool continueRunning = true;
 
 
-                do
+            do
+            {
+                PresentMenuOptions();
+                int selection = Utility.GetIntInput("Select an option: ", 0, 2);
+
+                if (selection == 0)
                 {
-                    PresentMenuOptions();
-
-                continueRunning = GetExitScheduler();
+                    Console.WriteLine("Exiting program");
+                    continueRunning = false;
+                    break;
                 }
-                while (continueRunning);
-            
+
+                switch (selection)
+                {
+                    case 1:
+                        displaySchedule("Weekend");
+                        break;
+
+                    case 2:
+                        displaySchedule("Night");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Selection!")
+                        break;
+                }
+
+
+            }
+            while (continueRunning);
+
         }
 
-        private bool GetExitScheduler()
-        {
-            string userInput = Utility.ReadInput("\nPress 'x' to exit or any letter key to continue");
-            return !userInput.Equals("x", StringComparison.CurrentCultureIgnoreCase); // return false
-        }
+
 
         private void PresentMenuOptions()
         {
