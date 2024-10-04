@@ -22,6 +22,6 @@ MathWork mathWork = new();
 mathWork.Start();
 Utility.AwaitUserInput();
 
-//Scheduler scheduler = new();
-//scheduler.Run();
-//Utility.AwaitUserInput();
+Scheduler scheduler = new();
+scheduler.Run();
+Utility.AwaitUserInput();
