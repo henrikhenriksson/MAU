@@ -7,7 +7,7 @@ namespace ConsoleAppAss2.Classes.Assignment2C
         public void Start()
         {
 
-            Console.Title = "Math Works!";
+            Console.Title = "Math Works! (Assignment2C";
             Calculate();
         }
 
@@ -15,41 +15,43 @@ namespace ConsoleAppAss2.Classes.Assignment2C
         {
             bool continueRunning = true;
 
-            
-                do
+
+            do
+            {
+                int firstEntry = Utility.GetIntInput("Enter a starting Integer(0 to 100): ", 0, 100); // Large numbers are unpredictable. For blockchain solving operations, some scaling might have to be considered.
+                int secondEntry = Utility.GetIntInput("Enter an Ending Integer(0 to 100):", 0, 100); // No negative numbers allowed as that breaks the Sqrt method
+
+                int start;
+                int end;
+
+                if (firstEntry < secondEntry)
                 {
-                    int firstEntry = Utility.GetIntInput("Enter a starting Integer: ");
-                    int secondEntry = Utility.GetIntInput("Enter an Ending Integer:");
-
-                    int start;
-                    int end;
-
-                    if (firstEntry < secondEntry)
-                    {
-                        start = firstEntry;
-                        end = secondEntry;
-                    }
-                    else
-                    {
-                        start = secondEntry;
-                        end = firstEntry;
-                    }
-
-
-
-                    Console.WriteLine("\n+++++ Summation of  your numbers +++++");
-                    Console.WriteLine($"\nThe sum of numbers from {start} to {end} is: {SumNumbers(start, end)}");
-
-                    PrintEvenNumbers(start, end);
-                    PrintOddNumbers(start, end);
-
-                    CalculateSquareRoots(start, end);
-
-                    continueRunning = GetExitCalculation();
+                    start = firstEntry;
+                    end = secondEntry;
                 }
-                while (continueRunning);
-            
+                else
+                {
+                    start = secondEntry;
+                    end = firstEntry;
+                }
+
+
+
+                Console.WriteLine("\n+++++ Summation of  your numbers +++++");
+                Console.WriteLine($"\nThe sum of numbers from {start} to {end} is: {SumNumbers(start, end)}");
+
+                PrintEvenNumbers(start, end);
+                PrintOddNumbers(start, end);
+
+                CalculateSquareRoots(start, end);
+
+                continueRunning = GetExitCalculation();
+            }
+            while (continueRunning);
+
         }
+
+        // This method currently outputs 
         private void CalculateSquareRoots(int num1, int num2)
         {
 
@@ -65,18 +67,25 @@ namespace ConsoleAppAss2.Classes.Assignment2C
                 {
                     double sqrt = Math.Sqrt(j);
 
-                    resultRow += $"{sqrt:F2}\t";
+                    resultRow += $"{sqrt,8:F2}\t";
                 }
                 Console.WriteLine($"Sqrt({i} to {num2,-3})\t{resultRow.Trim()}");
             }
-
-
-
         }
+
 
         private bool GetExitCalculation()
         {
-            string userInput = Utility.ReadInput("\nPress 'x' to exit or any letter key to continue");
+            Console.WriteLine("\nPress 'x' to exit or any letter key to continue");
+
+            string userInput = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(userInput))
+            {
+                return true;
+            }
+
+
             return !userInput.Equals("x", StringComparison.CurrentCultureIgnoreCase); // return false
         }
 
