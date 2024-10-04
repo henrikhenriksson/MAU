@@ -5,11 +5,11 @@ using System.Numerics;
 
 namespace ConsoleAppAss2.Classes.Assignment2D
 {
-    internal class SchedulerApp
+    internal class Scheduler
     {
         private readonly List<int> WeeksInYear = new();
 
-        public SchedulerApp()
+        public Scheduler()
         {
 
             // fill the list with 52 indexes
@@ -49,18 +49,18 @@ namespace ConsoleAppAss2.Classes.Assignment2D
                 }
 
 
-
-
                 switch (selection)
                 {
                     case 1:
                         var (weekendStartWeek, weekendInterval) = ConfigParameters("Weekend", 2, 2); // set defaults and shiftType
                         DisplaySchedule("Weekend", weekendStartWeek, weekendInterval);
+                        Utility.AwaitUserInput();
                         break;
 
                     case 2:
                         var (nightStartWeek, nightInterval) = ConfigParameters("Night", 1, 4);
                         DisplaySchedule("Night", nightStartWeek, nightInterval);
+                        Utility.AwaitUserInput();
                         break;
 
                     default:
@@ -78,7 +78,7 @@ namespace ConsoleAppAss2.Classes.Assignment2D
 
             Console.WriteLine($"\nConfig {shiftType} parameters");
 
-            int startWeek= GetInputInt($"Enter a Start week for {shiftType} Schedule.", defaultStartweek, 1,52);
+            int startWeek = GetInputInt($"Enter a Start week for {shiftType} Schedule.", defaultStartweek, 1, 52);
             int interval = GetInputInt($"Enter an interval for {shiftType} Schedule.", defaultInterval, 1, 52);
 
             return (startWeek, interval);
@@ -109,10 +109,29 @@ namespace ConsoleAppAss2.Classes.Assignment2D
             List<int> scheduledWeeksToDisplay = GetShiftWeeks(startWeek, interval);
 
             Console.WriteLine($"\n+++++ {shiftType} Weeks +++++");
+            Console.WriteLine($"Starting Week: {startWeek} | Interval: {interval} weeks\n");
+            
+            int columnCount = 0;
 
             foreach (var week in scheduledWeeksToDisplay)
             {
-                Console.WriteLine($"{week}");
+
+                Console.Write($"{week,-5}"); // Fixed width to 5
+
+                columnCount++;
+
+
+                if (columnCount % 5 == 0)
+                {
+                    Console.WriteLine(); // start new row
+                }
+
+
+            }
+            // if there are weeks remaining after the last row of 5, print new line
+            if (columnCount % 5 != 0)
+            {
+                Console.WriteLine();
             }
 
             Console.WriteLine();
@@ -126,7 +145,7 @@ namespace ConsoleAppAss2.Classes.Assignment2D
 
             while (!isValid)
             {
-                Console.WriteLine($"{message} (Press Enter for Default: {defaultValue})");
+                Console.Write($"{message} (Press Enter for Default: {defaultValue})");
                 string input = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(input))
@@ -142,7 +161,7 @@ namespace ConsoleAppAss2.Classes.Assignment2D
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid input. Please enter a valid integer between {min} and {max} or press Enter default.");
+                    Console.WriteLine($"\nInvalid input. Please enter a valid integer between {min} and {max} or press Enter default.");
                 }
             }
 
