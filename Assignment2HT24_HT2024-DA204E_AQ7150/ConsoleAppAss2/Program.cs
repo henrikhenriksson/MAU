@@ -5,6 +5,7 @@ using ConsoleAppAss2.Classes;
 using ConsoleAppAss2.Classes.Assignment2A;
 using ConsoleAppAss2.Classes.Assignment2B;
 using ConsoleAppAss2.Classes.Assignment2C;
+using ConsoleAppAss2.Classes.Assignment2D;
 
 Console.WriteLine("Starting Application");
 
@@ -13,16 +14,24 @@ Console.WriteLine("Starting Application");
 //temperatureConverter.Start();
 
 
-Utility.AwaitUserInput();
+//Utility.AwaitUserInput();
 
 
 //StringFunctions stringFunctions = new();
 
 //stringFunctions.Start();
 
+//Utility.AwaitUserInput();
+
+//MathWork mathWork = new();
+//mathWork.Start();
+
 Utility.AwaitUserInput();
 
-MathWork mathWork = new();
-mathWork.Start();
+Scheduler scheduler = new();
 
-Utility.AwaitUserInput();
+scheduler.Run();
+
+
+Console.WriteLine("All programs have been run. Press enter to exit the program");
+Console.ReadLine();
