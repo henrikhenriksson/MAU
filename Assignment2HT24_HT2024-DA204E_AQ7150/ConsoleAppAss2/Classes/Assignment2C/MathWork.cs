@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Written by: Henrik Henriksson(AQ7150)
 
 namespace ConsoleAppAss2.Classes.Assignment2C
 {
