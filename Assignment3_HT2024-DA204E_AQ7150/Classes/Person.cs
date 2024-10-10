@@ -20,7 +20,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         public double Height
         {
-            get { return _height; }
+            get => _height;
             set
             {
                 if (value < 0)
@@ -37,7 +37,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         public double Weight
         {
-            get { return _weight; }
+            get => _weight;
             set
             {
                 if (value < 0)
@@ -54,14 +54,14 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         public GenderEnum Gender
         {
-            get { return _gender; }
-            set { Gender = value; }
+            get => _gender;
+            set => Gender = value;
         }
 
         public ActivityLevel ActivityLevel
         {
-            get { return _activityLevel; }
-            set { _activityLevel = value; }
+            get => _activityLevel;
+            set => _activityLevel = value;
         }
 
 
