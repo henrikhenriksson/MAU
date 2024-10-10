@@ -17,6 +17,29 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         private double _weight;
         private GenderEnum _gender;
         private ActivityLevel _activityLevel;
+        private int _birthYear;
+        private string _name = "NoName"; // default value
+
+        public string Name
+        {
+
+            get { return _name; }
+            set { _name = value; } // 
+
+                }
+
+        public double BirthYear
+        {
+            get => _birthYear;
+            set
+            {
+                if (value < 1900 || value >= DateTime.Now.Year)
+                {
+                    throw new ArgumentException("Year of birth must be a valid year.");
+                }
+
+            }
+        }
 
         public double Height
         {
