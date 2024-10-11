@@ -1,4 +1,6 @@
-﻿using Assignment3_HT2024_DA204E_AQ7150.Enums;
+﻿// Ignore Spelling: AQ
+
+using Assignment3_HT2024_DA204E_AQ7150.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +24,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         public string Name
         {
+            get => _name;
+            set => _name = value;  
 
-            get { return _name; }
-            set { _name = value; } // 
+        }
 
-                }
-
-        public double BirthYear
+        public int BirthYear
         {
             get => _birthYear;
             set
@@ -37,7 +38,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
                 {
                     throw new ArgumentException("Year of birth must be a valid year.");
                 }
-
+                _birthYear = value;
             }
         }
 
