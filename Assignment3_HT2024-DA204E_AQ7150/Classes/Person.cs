@@ -36,7 +36,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
             {
                 if (value < 1900 || value >= DateTime.Now.Year)
                 {
-                    throw new ArgumentException("Year of birth must be a valid year.");
+                    throw new ArgumentException("Year of birth must be a valid year between 1900 and now.");
                 }
                 _birthYear = value;
             }
