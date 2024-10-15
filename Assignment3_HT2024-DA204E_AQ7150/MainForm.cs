@@ -10,11 +10,16 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 {
     public partial class MainForm : Form
     {
-
-        private TextBox txtHeight;
+        private TextBox txtName;
         private TextBox txtFeet;
         private TextBox txtInches;
-
+        private TextBox txtHeight;
+        private TextBox txtWeight;
+        private TextBox txtBirthYear;
+        private Label lblWaterResult;
+        private RadioButton rdoMetric;
+        private RadioButton rdoImperial;
+        private Panel pnlWaterIntakeCalculator;
 
         public MainForm()
         {
@@ -36,7 +41,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             Font commonFont = new("Arial", 10, FontStyle.Regular);
 
             // Panel for the calculator:
-            Panel pnlWaterIntakeCalculator = new Panel()
+            pnlWaterIntakeCalculator = new()
             {
                 Location = new Point(10, 10),
                 Size = new Size(380, 400),
@@ -55,8 +60,9 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 Font = commonFont,
                 BackColor = Color.DarkSlateGray
             };
+            pnlWaterIntakeCalculator.Controls.Add(grpUnits);
 
-            RadioButton rdoMetric = new RadioButton()
+            rdoMetric = new RadioButton()
             {
                 Name = "rdoMetric",
                 Text = "Metric (cm,kg,ml)",
@@ -65,9 +71,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 ForeColor = labelTextColor,
                 Font = commonFont
             };
+            grpUnits.Controls.Add(rdoMetric);
 
 
-            RadioButton rdoImperial = new RadioButton()
+
+
+            rdoImperial = new RadioButton()
             {
                 Name = "rdoImperial",
                 Text = "Imperial (ft.in / lbs. oz)",
@@ -75,13 +84,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 ForeColor = labelTextColor,
                 Font = commonFont
             };
-
-            // add them to the control
-            grpUnits.Controls.Add(rdoMetric);
             grpUnits.Controls.Add(rdoImperial);
-            // add the grpbox to panel
-            // 
-            pnlWaterIntakeCalculator.Controls.Add(grpUnits);
+            // event handlers to toggle input fields and update the values in the txtboxes.
+            rdoMetric.CheckedChanged += (s, e) => ToggleHeightInputs();
+            rdoMetric.CheckedChanged += (s, e) => UpdateConversion();
+            rdoImperial.CheckedChanged += (s, e) => ToggleHeightInputs();
+            rdoImperial.CheckedChanged += (s, e) => UpdateConversion();
 
             Label lblName = new Label()
             {
@@ -90,10 +98,9 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 ForeColor = labelTextColor,
                 Font = commonFont
             };
+            pnlWaterIntakeCalculator.Controls.Add(lblName);
 
-            // TODO: Add and show ft&in if imperial is checked.
-
-            TextBox txtName = new TextBox()
+            txtName = new TextBox()
             {
                 Name = "txtName",
                 Location = new Point(120, 90),
@@ -102,6 +109,8 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 Width = 200
 
             };
+            pnlWaterIntakeCalculator.Controls.Add(txtName);
+
 
             Label lblHeight = new Label()
             {
@@ -128,7 +137,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 Location = new Point(120, 130),
                 BackColor = Color.LightGray,
                 Font = commonFont,
-                Width =90,
+                Width = 90,
                 Visible = false
             };
             pnlWaterIntakeCalculator.Controls.Add(txtFeet);
@@ -147,56 +156,57 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             Label lblWeight = new Label()
             {
                 Text = "Weight",
-                Location = new Point(20, 140),
+                Location = new Point(20, 170),
                 ForeColor = labelTextColor,
                 Font = commonFont
             };
+            pnlWaterIntakeCalculator.Controls.Add(lblWeight);
 
-            TextBox txtWeight = new TextBox()
+            txtWeight = new TextBox()
             {
                 Name = "txtWeight",
-                Location = new Point(120, 140),
+                Location = new Point(120, 170),
                 BackColor = Color.LightGray,
                 Font = commonFont,
                 Width = 200
             };
-            pnlWaterIntakeCalculator.Controls.Add(lblWeight);
             pnlWaterIntakeCalculator.Controls.Add(txtWeight);
 
             Label lblGender = new Label()
             {
                 Text = "Gender:",
-                Location = new Point(20, 180),
+                Location = new Point(20, 210),
                 ForeColor = Color.LightGray,
                 Font = commonFont
             };
+            pnlWaterIntakeCalculator.Controls.Add(lblGender);
 
             ComboBox cmbGender = new ComboBox()
             {
                 Name = "cmbGender",
-                Location = new Point(120, 180),
+                Location = new Point(120, 210),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.LightGray,
                 Font = commonFont,
                 Width = 200
             };
             cmbGender.Items.AddRange(Enum.GetNames(typeof(GenderEnum)));
-            pnlWaterIntakeCalculator.Controls.Add(lblGender);
             pnlWaterIntakeCalculator.Controls.Add(cmbGender);
 
             Label lblActitivyLevel = new Label()
             {
                 Text = "Activity Level:",
-                Location = new Point(20, 220),
+                Location = new Point(20, 250),
                 ForeColor = Color.LightGray,
                 Font = commonFont
             };
+            pnlWaterIntakeCalculator.Controls.Add(lblActitivyLevel);
 
 
             ComboBox cmbActivityLevel = new ComboBox()
             {
                 Name = "cmbActivityLevel",
-                Location = new Point(120, 220),
+                Location = new Point(120, 250),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.LightGray,
                 Font = commonFont,
@@ -204,56 +214,153 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             };
 
             cmbActivityLevel.Items.AddRange(Enum.GetNames(typeof(ActivityLevel)));
-            pnlWaterIntakeCalculator.Controls.Add(lblActitivyLevel);
             pnlWaterIntakeCalculator.Controls.Add(cmbActivityLevel);
+
+            Label lblBirthYear = new()
+            {
+                Text = "Birth Year:",
+                Location = new System.Drawing.Point(20, 290),
+                ForeColor = labelTextColor,
+                Font = commonFont
+            };
+            pnlWaterIntakeCalculator.Controls.Add(lblBirthYear);
+
+            // TextBox for Birth Year input
+            txtBirthYear = new TextBox()
+            {
+                Name = "txtBirthYear",
+                Location = new System.Drawing.Point(120, 290),
+                BackColor = Color.LightGray,
+                Font = commonFont,
+                Width = 200
+            };
+            pnlWaterIntakeCalculator.Controls.Add(txtBirthYear);
+
 
             Button btnCalculate = new Button()
             {
                 Text = "Calculate Water Intake",
-                Location = new Point(20, 260),
+                Location = new Point(20, 330),
                 BackColor = Color.Gray,
                 ForeColor = labelTextColor,
                 Font = commonFont,
-                Width= 300
+                Width = 200
             };
             btnCalculate.Click += btnCalculate_Click;
             pnlWaterIntakeCalculator.Controls.Add(btnCalculate);
 
-            Label lblResult = new Label()
+            Label lblWaterResult = new Label()
             {
-                Name = "lblResult",
+                Name = "lblWaterResult",
                 Text = "Daily Water Intake",
-                Location = new Point(20, 300),
+                Location = new Point(20, 370),
                 AutoSize = true,
                 ForeColor = labelTextColor,
                 Font = commonFont
-                
+
             };
-            this.Controls.Add(lblResult);
+            Controls.Add(lblWaterResult);
 
         }
 
+        private void UpdateConversion()
+        {
+
+            if (rdoMetric.Checked)
+            {
+                // convert ft&in to cm and update inputfield.
+                if (!string.IsNullOrWhiteSpace(txtFeet.Text)
+                    && !string.IsNullOrWhiteSpace(txtInches.Text))
+                {
+                    double cm = Conversions.InchesToCm((int.Parse(txtFeet.Text) * 12) + double.Parse(txtInches.Text));
+                    txtHeight.Text = cm.ToString("N2");
+                }
+                else if (rdoImperial.Checked)
+                {
+                    if (!string.IsNullOrWhiteSpace(txtHeight.Text))
+                    {
+                        (int feet, double inches) = Conversions.CmToFeetAndInches(double.Parse(txtHeight.Text));
+                        txtFeet.Text = feet.ToString();
+                        txtInches.Text = inches.ToString("N2");
+                    }
+                }
+
+            }
+        }
+
+
+
+        // Call method to toggle height in cm or ft&in
+        private void ToggleHeightInputs()
+        {
+            bool isMetric = rdoMetric.Checked;
+
+            txtHeight.Visible = isMetric;
+            txtFeet.Visible = !isMetric;
+            txtInches.Visible = !isMetric;
+        }
+
+
+
         private void btnCalculate_Click(object? sender, EventArgs e)
         {
-            // get metric or imperial
+            CalculateAndDisplayWaterIntake();
+        }
 
-            // get values for height/weight
+        private void CalculateAndDisplayWaterIntake()
+        {
+            try
+            {
+                // get metric or imperial
+                bool isMetric = rdoMetric.Checked;
 
-            // check conversion or not
+                // get name
+                string name = txtName.Text;
+
+                // get values for height/weight
+                // check conversion or not
+
+                double height = isMetric
+                    ? double.Parse(txtHeight.Text)
+                    : Conversions.InchesToCm((int.Parse(txtFeet.Text) * 12) + double.Parse(txtInches.Text));
 
 
-            // get gender
+                double weight = isMetric
+                    ? double.Parse(txtWeight.Text)
+                    : Conversions.PoundsToKg(double.Parse(txtWeight.Text));
 
-            // get actiivity
+                // get gender
 
-            // create person
-
-            // create watercalculator instance and insert person
-
-            // display the calculated result
+                GenderEnum gender = (GenderEnum)Enum.Parse(typeof(GenderEnum), ((ComboBox)pnlWaterIntakeCalculator.Controls["cmbGender"]).SelectedItem.ToString());
 
 
-            
+                // get actiivity
+
+
+                ActivityLevel activityLevel = (ActivityLevel)Enum.Parse(typeof(ActivityLevel), ((ComboBox)pnlWaterIntakeCalculator.Controls["cmbActivityLevel"]).SelectedItem.ToString());
+
+                // get year of birth
+                int birthYear = int.Parse(txtBirthYear.Text);
+
+                // create person
+                Person person = new Person(name, height, weight, gender, activityLevel, birthYear);
+
+
+                // create watercalculator instance and insert person
+                WaterIntakeCalculator waterIntakeCalculator = new WaterIntakeCalculator();
+
+                double dailyWaterIntake = waterIntakeCalculator.CalculateIntake(person);
+
+
+                // display the calculated result
+
+                lblWaterResult.Text = $"Daily Water Intake: {dailyWaterIntake:N2}";
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Please check the input values before converting.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }
