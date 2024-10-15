@@ -10,6 +10,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 {
     public partial class MainForm : Form
     {
+
+        private TextBox txtHeight;
+        private TextBox txtFeet;
+        private TextBox txtInches;
+
+
         public MainForm()
         {
             InitializeComponent();
@@ -100,21 +106,43 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             Label lblHeight = new Label()
             {
                 Text = "Height:",
-                Location = new System.Drawing.Point(20, 100),
+                Location = new System.Drawing.Point(20, 130),
                 ForeColor = labelTextColor,
                 Font = commonFont
             };
-            TextBox txtHeight = new TextBox()
+            pnlWaterIntakeCalculator.Controls.Add(lblHeight);
+
+            txtHeight = new TextBox()
             {
                 Name = "TxtHeight",
-                Location = new Point(120, 100),
+                Location = new Point(120, 130),
                 BackColor = Color.LightGray,
                 Font = commonFont,
                 Width = 200
             };
-            pnlWaterIntakeCalculator.Controls.Add(lblHeight);
             pnlWaterIntakeCalculator.Controls.Add(txtHeight);
 
+            txtFeet = new TextBox()
+            {
+                Name = "TxtFeet",
+                Location = new Point(120, 130),
+                BackColor = Color.LightGray,
+                Font = commonFont,
+                Width =90,
+                Visible = false
+            };
+            pnlWaterIntakeCalculator.Controls.Add(txtFeet);
+
+            txtInches = new TextBox()
+            {
+                Name = "TxtInches",
+                Location = new Point(230, 130),
+                BackColor = Color.LightGray,
+                Font = commonFont,
+                Width = 90,
+                Visible = false
+            };
+            pnlWaterIntakeCalculator.Controls.Add(txtInches);
 
             Label lblWeight = new Label()
             {
@@ -220,7 +248,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 
             // create person
 
+            // create watercalculator instance and insert person
 
+            // display the calculated result
+
+
+            
 
         }
     }
