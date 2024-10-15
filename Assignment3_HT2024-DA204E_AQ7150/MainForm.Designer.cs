@@ -1,4 +1,7 @@
-﻿namespace Assignment3_HT2024_DA204E_AQ7150
+﻿// Written by: Henrik Henriksson (AQ7150)
+
+
+namespace Assignment3_HT2024_DA204E_AQ7150
 {
     partial class MainForm
     {

@@ -1,3 +1,6 @@
+// Written by: Henrik Henriksson (AQ7150)
+// Ignore Spelling: AQ
+
 namespace Assignment3_HT2024_DA204E_AQ7150
 {
     internal static class Program
