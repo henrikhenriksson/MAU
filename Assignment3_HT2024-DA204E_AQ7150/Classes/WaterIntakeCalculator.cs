@@ -1,8 +1,10 @@
 ﻿// Ignore Spelling: AQ
 
+using Assignment3_HT2024_DA204E_AQ7150.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,47 +45,69 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         public double CalculateIntake(Person person)
         {
+            if (person == null) { throw new ArgumentNullException(nameof(person), "Person cannot be null"); }
+
+
             // Base intake = 33 ml / kg 
             double baseIntake = person.Weight * BaseIntakePerKG;
-
-            if (person.Gender == Enums.GenderEnum.Male) { 
-            
-                baseIntake *= MaleAdjustment;
-          
-            
-            } else { baseIntake *= FemaleAdjustment; }
-
             baseIntake = AdjustForGender(baseIntake, person);
             baseIntake = AdjustForAge(baseIntake, person);
             baseIntake = AdjustForHeight(baseIntake, person);
             baseIntake = AdjustForActivityLevel(baseIntake, person);
 
             return baseIntake;
-
-
-
-
-
         }
-
-        private double AdjustForActivityLevel(double baseIntake, Person person)
+        private double AdjustForGender(double intake, Person person)
         {
-            throw new NotImplementedException();
+            return person.Gender == Enums.GenderEnum.Male
+                ? intake *= MaleAdjustment
+                : intake *= FemaleAdjustment;
+        }
+        private double AdjustForActivityLevel(double intake, Person person)
+        {
+            return person.ActivityLevel switch
+            {
+                ActivityLevel.Low => intake,// no adjustment
+                ActivityLevel.Medium => intake * ActivityMediumAdjustment,
+                ActivityLevel.High => intake * ActivityHighAdjustment,
+                _ => intake,
+            };
+        }
+        private double AdjustForAge(double intake, Person person)
+        {
+            if (GetAge(person) < AgeLow)
+            {
+                return intake * AgeAdjustmentUnder30;
+            }
+            else if (GetAge(person) > AgeHigh)
+            {
+                return intake * AgeAdjustmentOver55;
+            }
+            return intake; // no adjustment
+
+
+
+        }
+        private int GetAge(Person person)
+        {
+            return DateTime.Now.Year - person.BirthYear;
         }
 
-        private double AdjustForHeight(double baseIntake, Person person)
+        private double AdjustForHeight(double intake, Person person)
         {
-            throw new NotImplementedException();
+            if (person.Height > TallHeight)
+            {
+                return intake * TallHeightAdjustment;
+
+            }
+            else if (person.Height < ShortHeight)
+            {
+                return intake * ShortHeightAdjustment;
+            }
+
+            return intake; // no adjustment
+
         }
 
-        private double AdjustForAge(double baseIntake, Person person)
-        {
-            throw new NotImplementedException();
-        }
-
-        private double AdjustForGender(double baseIntake, Person person)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
