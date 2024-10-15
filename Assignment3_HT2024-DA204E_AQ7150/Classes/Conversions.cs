@@ -1,5 +1,5 @@
 ﻿// Written by: Henrik Henriksson (AQ7150)
-// Ignore Spelling: AQ
+// Ignore Spelling: AQ Mlto
 
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,6 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         // metric to imperial
         public static double CmToInches(double cm) => cm / 2.54;
         public static double KgToPounds(double kg) => kg / 0.453592;
-        public static double MltoOunces(double ml) => ml * 0.033814;
+        public static double MlToOunces(double ml) => ml * 0.033814;
     }
 }
