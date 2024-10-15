@@ -20,7 +20,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         private RadioButton rdoMetric;
         private RadioButton rdoImperial;
         private Panel pnlWaterIntakeCalculator;
-
+        
         public MainForm()
         {
             InitializeComponent();
@@ -72,9 +72,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 Font = commonFont
             };
             grpUnits.Controls.Add(rdoMetric);
-
-
-
+            rdoMetric.CheckedChanged += (s, e) => ToggleHeightInputs();
 
             rdoImperial = new RadioButton()
             {
@@ -86,10 +84,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             };
             grpUnits.Controls.Add(rdoImperial);
             // event handlers to toggle input fields and update the values in the txtboxes.
-            rdoMetric.CheckedChanged += (s, e) => ToggleHeightInputs();
-            rdoMetric.CheckedChanged += (s, e) => UpdateConversion();
             rdoImperial.CheckedChanged += (s, e) => ToggleHeightInputs();
-            rdoImperial.CheckedChanged += (s, e) => UpdateConversion();
 
             Label lblName = new Label()
             {
@@ -190,7 +185,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 Font = commonFont,
                 Width = 200
             };
-            cmbGender.Items.AddRange(Enum.GetNames(typeof(GenderEnum)));
+            cmbGender.Items.AddRange(Enum.GetNames(typeof(Gender)));
             pnlWaterIntakeCalculator.Controls.Add(cmbGender);
 
             Label lblActitivyLevel = new Label()
@@ -249,17 +244,17 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             btnCalculate.Click += btnCalculate_Click;
             pnlWaterIntakeCalculator.Controls.Add(btnCalculate);
 
-            Label lblWaterResult = new Label()
+            lblWaterResult = new Label()
             {
                 Name = "lblWaterResult",
-                Text = "Daily Water Intake",
+                Text = $"Daily Water Intake: ",
                 Location = new Point(20, 370),
                 AutoSize = true,
                 ForeColor = labelTextColor,
                 Font = commonFont
 
             };
-            Controls.Add(lblWaterResult);
+            pnlWaterIntakeCalculator.Controls.Add(lblWaterResult);
 
         }
 
@@ -275,16 +270,17 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                     double cm = Conversions.InchesToCm((int.Parse(txtFeet.Text) * 12) + double.Parse(txtInches.Text));
                     txtHeight.Text = cm.ToString("N2");
                 }
-                else if (rdoImperial.Checked)
-                {
-                    if (!string.IsNullOrWhiteSpace(txtHeight.Text))
-                    {
-                        (int feet, double inches) = Conversions.CmToFeetAndInches(double.Parse(txtHeight.Text));
-                        txtFeet.Text = feet.ToString();
-                        txtInches.Text = inches.ToString("N2");
-                    }
-                }
 
+
+            }
+            else if (rdoImperial.Checked)
+            {
+                if (!string.IsNullOrWhiteSpace(txtHeight.Text))
+                {
+                    (int feet, double inches) = Conversions.CmToFeetAndInches(double.Parse(txtHeight.Text));
+                    txtFeet.Text = feet.ToString();
+                    txtInches.Text = inches.ToString("N2");
+                }
             }
         }
 
@@ -293,6 +289,8 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         // Call method to toggle height in cm or ft&in
         private void ToggleHeightInputs()
         {
+
+            UpdateConversion(); // update before toggling to ensure correct values are shown.
             bool isMetric = rdoMetric.Checked;
 
             txtHeight.Visible = isMetric;
@@ -331,7 +329,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 
                 // get gender
 
-                GenderEnum gender = (GenderEnum)Enum.Parse(typeof(GenderEnum), ((ComboBox)pnlWaterIntakeCalculator.Controls["cmbGender"]).SelectedItem.ToString());
+                Gender gender = (Gender)Enum.Parse(typeof(Gender), ((ComboBox)pnlWaterIntakeCalculator.Controls["cmbGender"]).SelectedItem.ToString());
 
 
                 // get actiivity
@@ -353,8 +351,11 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 
 
                 // display the calculated result
+                lblWaterResult = (Label)pnlWaterIntakeCalculator.Controls["lblWaterResult"];
 
-                lblWaterResult.Text = $"Daily Water Intake: {dailyWaterIntake:N2}";
+                lblWaterResult.Text = isMetric 
+                    ? $"Daily Water Intake: {dailyWaterIntake:N2} ml" 
+                    : $"Daily Water Intake: {Conversions.MlToOunces(dailyWaterIntake):N2} oz";
 
             }
             catch (Exception)
