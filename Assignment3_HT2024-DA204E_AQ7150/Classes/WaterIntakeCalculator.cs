@@ -60,7 +60,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         }
         private double AdjustForGender(double intake, Person person)
         {
-            return person.Gender == Enums.GenderEnum.Male
+            return person.Gender == Enums.Gender.Male
                 ? intake *= MaleAdjustment
                 : intake *= FemaleAdjustment;
         }
