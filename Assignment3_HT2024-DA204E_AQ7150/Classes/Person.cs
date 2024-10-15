@@ -78,7 +78,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         public Gender Gender
         {
             get => _gender;
-            set => Gender = value;
+            set => _gender = value;
         }
 
         public ActivityLevel ActivityLevel
