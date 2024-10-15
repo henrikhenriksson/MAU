@@ -18,7 +18,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
     {
         private double _height;
         private double _weight;
-        private GenderEnum _gender;
+        private Gender _gender;
         private ActivityLevel _activityLevel;
         private int _birthYear;
         private string _name = "NoName"; // default value
@@ -56,8 +56,6 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
                 _height = value;
 
             }
-
-
         }
 
         public double Weight
@@ -77,7 +75,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         }
 
-        public GenderEnum Gender
+        public Gender Gender
         {
             get => _gender;
             set => Gender = value;
@@ -89,19 +87,18 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
             set => _activityLevel = value;
         }
 
-
-
-
-
-        public Person(double height,
+        public Person(string name,
+                      double height,
                       double width,
-                      GenderEnum gender,
-                      ActivityLevel activityLevel)
+                      Gender gender,
+                      ActivityLevel activityLevel, int birthYear)
         {
-            this._height = height;
-            this._weight = width;
-            this._gender = gender;
-            this._activityLevel = activityLevel;
+            this.Name = name;
+            this.Height = height;
+            this.Weight = width;
+            this.Gender = gender;
+            this.ActivityLevel = activityLevel;
+            this.BirthYear = birthYear;
         }
 
 
