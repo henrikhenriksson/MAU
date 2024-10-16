@@ -26,10 +26,16 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         public MainForm()
         {
             InitializeComponent();
-            InitializeGUI();
+            InitializeWaterIntakeGUI();
+            InitializeRetirementCalculatorGUI();
         }
 
-        private void InitializeGUI()
+        private void InitializeRetirementCalculatorGUI()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InitializeWaterIntakeGUI()
         {
             Text = "Water Intake Calculator";
             StartPosition = FormStartPosition.CenterScreen;
