@@ -17,10 +17,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         private TextBox txtWeight;
         private TextBox txtBirthYear;
         private Label lblWaterResult;
+        private string personName;
         private RadioButton rdoMetric;
         private RadioButton rdoImperial;
         private Panel pnlWaterIntakeCalculator;
-        
+        private double dailyWaterIntake;
+
         public MainForm()
         {
             InitializeComponent();
@@ -84,7 +86,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             };
             grpUnits.Controls.Add(rdoImperial);
             // event handlers to toggle input fields and update the values in the txtboxes.
-            rdoImperial.CheckedChanged += (s, e) => ToggleHeightInputs();
+            // rdoImperial.CheckedChanged += (s, e) => ToggleHeightInputs();
 
             Label lblName = new Label()
             {
@@ -261,6 +263,8 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         private void UpdateConversion()
         {
 
+            lblWaterResult = (Label)pnlWaterIntakeCalculator.Controls["lblWaterResult"];
+
             if (rdoMetric.Checked)
             {
                 // convert ft&in to cm and update inputfield.
@@ -269,6 +273,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 {
                     double cm = Conversions.InchesToCm((int.Parse(txtFeet.Text) * 12) + double.Parse(txtInches.Text));
                     txtHeight.Text = cm.ToString("N2");
+                    lblWaterResult.Text = $"Daily Water Intake for {personName}: {dailyWaterIntake:N2} ml";
                 }
 
 
@@ -280,6 +285,8 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                     (int feet, double inches) = Conversions.CmToFeetAndInches(double.Parse(txtHeight.Text));
                     txtFeet.Text = feet.ToString();
                     txtInches.Text = inches.ToString("N2");
+                    lblWaterResult.Text = $"Daily Water Intake for {personName}: {Conversions.MlToOunces(dailyWaterIntake):N2} oz";
+
                 }
             }
         }
@@ -291,12 +298,16 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         {
 
             UpdateConversion(); // update before toggling to ensure correct values are shown.
+
             bool isMetric = rdoMetric.Checked;
 
             txtHeight.Visible = isMetric;
             txtFeet.Visible = !isMetric;
             txtInches.Visible = !isMetric;
+          
         }
+
+        
 
 
 
@@ -347,15 +358,16 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 // create watercalculator instance and insert person
                 WaterIntakeCalculator waterIntakeCalculator = new WaterIntakeCalculator();
 
-                double dailyWaterIntake = waterIntakeCalculator.CalculateIntake(person);
+                dailyWaterIntake = waterIntakeCalculator.CalculateIntake(person);
 
 
                 // display the calculated result
                 lblWaterResult = (Label)pnlWaterIntakeCalculator.Controls["lblWaterResult"];
+                personName = $"{person.Name}";
 
                 lblWaterResult.Text = isMetric 
-                    ? $"Daily Water Intake: {dailyWaterIntake:N2} ml" 
-                    : $"Daily Water Intake: {Conversions.MlToOunces(dailyWaterIntake):N2} oz";
+                    ? $"Daily Water Intake for {personName}: {dailyWaterIntake:N2} ml" 
+                    : $"Daily Water Intake for {personName}: {Conversions.MlToOunces(dailyWaterIntake):N2} oz";
 
             }
             catch (Exception)
