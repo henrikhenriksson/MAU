@@ -26,6 +26,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         /// <summary>
         /// We want to avoid magic numbers, this will hopefully increase scalability and modularity 
         /// whereas the values of the constants can be changed if needed in the future.
+        /// i hope this deviation from the instructions (3.9) is all right.
         /// </summary>
         private const double BaseIntakePerKG = 33;
         private const double MaleAdjustment = 1.1;
@@ -39,12 +40,17 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         private const int TallHeight = 175;
         private const int ShortHeight = 160;
-        private int AgeLow = 30;
-        private int AgeHigh = 55;
+        private const int AgeLow = 30;
+        private const int AgeHigh = 55;
 
+        private Person person;
 
+        public WaterIntakeCalculator(Person person)
+        {
+            this.person = person;
+        }
 
-        public double CalculateIntake(Person person)
+        public double CalculateIntake()
         {
             if (person == null) { throw new ArgumentNullException(nameof(person), "Person cannot be null"); }
 

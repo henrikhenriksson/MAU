@@ -356,9 +356,9 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 
 
                 // create watercalculator instance and insert person
-                WaterIntakeCalculator waterIntakeCalculator = new WaterIntakeCalculator();
+                WaterIntakeCalculator waterIntakeCalculator = new WaterIntakeCalculator(person);
 
-                dailyWaterIntake = waterIntakeCalculator.CalculateIntake(person);
+                dailyWaterIntake = waterIntakeCalculator.CalculateIntake();
 
 
                 // display the calculated result
