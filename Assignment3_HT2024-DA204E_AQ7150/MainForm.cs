@@ -86,7 +86,6 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             };
             grpUnits.Controls.Add(rdoImperial);
             // event handlers to toggle input fields and update the values in the txtboxes.
-            // rdoImperial.CheckedChanged += (s, e) => ToggleHeightInputs();
 
             Label lblName = new Label()
             {
@@ -320,6 +319,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         {
             try
             {
+                dailyWaterIntake = 0; // reset the variable when calculating for a new person.
                 // get metric or imperial
                 bool isMetric = rdoMetric.Checked;
 
