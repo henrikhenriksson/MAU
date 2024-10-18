@@ -1,15 +1,20 @@
-
-
-// Written by : Henrik Henriksson(AQ7150)
-// Ignore Spelling: AQ
-
-using Assignment3_HT2024_DA204E_AQ7150.Classes;
+﻿using Assignment3_HT2024_DA204E_AQ7150.Classes;
 using Assignment3_HT2024_DA204E_AQ7150.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace Assignment3_HT2024_DA204E_AQ7150
+namespace Assignment3_HT2024_DA204E_AQ7150.Forms
 {
-    public partial class MainForm : Form
+    public partial class WaterIntakeCalculatorForm : Form
     {
+
         private TextBox txtName;
         private TextBox txtFeet;
         private TextBox txtInches;
@@ -23,16 +28,10 @@ namespace Assignment3_HT2024_DA204E_AQ7150
         private Panel pnlWaterIntakeCalculator;
         private double dailyWaterIntake;
 
-        public MainForm()
+        public WaterIntakeCalculatorForm()
         {
             InitializeComponent();
             InitializeWaterIntakeGUI();
-            InitializeRetirementCalculatorGUI();
-        }
-
-        private void InitializeRetirementCalculatorGUI()
-        {
-            throw new NotImplementedException();
         }
 
         private void InitializeWaterIntakeGUI()
@@ -295,10 +294,6 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 }
             }
         }
-
-
-
-        // Call method to toggle height in cm or ft&in
         private void ToggleHeightInputs()
         {
 
@@ -309,10 +304,10 @@ namespace Assignment3_HT2024_DA204E_AQ7150
             txtHeight.Visible = isMetric;
             txtFeet.Visible = !isMetric;
             txtInches.Visible = !isMetric;
-          
+
         }
 
-        
+
 
 
 
@@ -371,8 +366,8 @@ namespace Assignment3_HT2024_DA204E_AQ7150
                 lblWaterResult = (Label)pnlWaterIntakeCalculator.Controls["lblWaterResult"];
                 personName = $"{person.Name}";
 
-                lblWaterResult.Text = isMetric 
-                    ? $"Daily Water Intake for {personName}: {dailyWaterIntake:N2} ml" 
+                lblWaterResult.Text = isMetric
+                    ? $"Daily Water Intake for {personName}: {dailyWaterIntake:N2} ml"
                     : $"Daily Water Intake for {personName}: {Conversions.MlToOunces(dailyWaterIntake):N2} oz";
 
             }
