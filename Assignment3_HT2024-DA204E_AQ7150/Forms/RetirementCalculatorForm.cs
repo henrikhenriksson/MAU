@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment3_HT2024_DA204E_AQ7150.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,14 +20,21 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Forms
         private TextBox txtMonthlyFees;
         private ComboBox cmbRetirementAge;
         private Label lblResult;
+        private Person person;
+        private TextBox txtBirthYear;
 
-
-
-        public RetirementCalculatorForm()
+        public RetirementCalculatorForm(Person person)
         {
             InitializeComponent();
+            this.person = person;
             InitializeRetirementCalculatorGUI();
+
+            // if the user has not yet created a "Person" object in the other calculator:
+
         }
+
+
+
 
         private void InitializeRetirementCalculatorGUI()
         {
@@ -120,7 +128,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Forms
             txtMonthlyFees = new TextBox()
             {
                 Name = "txtMonthlyFees",
-                Location = new Point(180,140),
+                Location = new Point(180, 140),
                 BackColor = Color.LightGray,
                 Font = commonFont,
                 Width = 180
@@ -144,6 +152,54 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Forms
             cmbRetirementAge.Items.AddRange(["62", "63", "64", "65", "66", "67", "68", "69", "70",]);
             cmbRetirementAge.SelectedIndex = 0;
             pnlRetirementCalculator.Controls.Add(cmbRetirementAge);
+                    
+            
+            // In case the user has not entered personal details in the other calculator and the person object is null,
+            // we will prompt them to add their birthyear here.
+            Label lblBirthYear = new Label()
+            {
+                Text = "Your year of birth: ",
+                Location = new Point(20, 140),
+                BackColor = labelTextColor,
+                ForeColor = labelTextColor,
+                Font = commonFont,
+                Visible= false
+
+
+            };
+            pnlRetirementCalculator.Controls.Add(lblBirthYear);
+
+
+            txtBirthYear = new TextBox()
+            {
+                Name = "txtBirthYear",
+                Location = new Point(180, 140),
+                BackColor = Color.LightGray,
+                Font = commonFont,
+                Width = 180,
+                Visible = false
+
+            };
+            pnlRetirementCalculator.Controls.Add(txtBirthYear);
+
+            if (person == null) {
+                lblBirthYear.Visible = true;
+                txtBirthYear.Visible = true;
+            }
+
+
+            // presenting the results:
+            lblResult = new Label()
+            {
+                Location = new Point(20, 280),
+                Size = new Size(340, 150),
+                ForeColor = labelTextColor,
+                Font = commonFont,
+                AutoSize = false
+            };
+            pnlRetirementCalculator.Controls.Add(txtBirthYear);
+
+            
 
             Button btnCalculateRetirement = new Button()
             {
@@ -158,25 +214,18 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Forms
             pnlRetirementCalculator.Controls.Add(btnCalculateRetirement);
 
 
-            // presenting the results:
-            lblResult = new Label()
-            {
-                Location = new Point(20, 280),
-                Size = new Size(340, 150),
-                ForeColor = labelTextColor,
-                Font = commonFont,
-                AutoSize = false
-            };
-
-
-
-
-
         }
 
         private void BtnCalculateRetirement_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            double initialBalance = double.Parse(txtInitialBalance.Text);
+            double monthlySaving = double.Parse(txtMonthlySaving.Text);
+            double annualInterestRate = double.Parse(txtAnnualInterestRate.Text);
+            double monthylFees = double.Parse(txtMonthlyFees.Text);
+            int retirementAge = int.Parse(cmbRetirementAge!.SelectedItem.ToString());
+
+
+
         }
     }
 }
