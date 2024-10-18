@@ -74,7 +74,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
         }
 
-
+        // Properties with validation to keep values within reasonable ranges.
         public double Balance
         {
             get { return balance; }
