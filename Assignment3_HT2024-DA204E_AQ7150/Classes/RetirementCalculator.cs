@@ -36,7 +36,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
             MonthlySaving = monthlySaving;
             Interest = annualInterestRate;
             Fees = monthlyFees;
-            PeriodInYears = retirementAge - GetAge(person);
+            PeriodInYears = retirementAge - person.GetAge();
         }
 
         // Algorithm:
@@ -75,6 +75,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         }
 
         // Properties with validation to keep values within reasonable ranges.
+        // They don't work very well when used in the Form, i will however keep them as a safety backup validation
         public double Balance
         {
             get { return balance; }
@@ -132,10 +133,7 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
 
 
 
-        private int GetAge(Person person)
-        {
-            return DateTime.Now.Year - person.BirthYear;
-        }
+    
 
 
 
