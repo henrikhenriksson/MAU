@@ -101,7 +101,14 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
             this.BirthYear = birthYear;
         }
 
-
-
+        // empty constructor
+        public Person()
+        {
+        }
+        // moved this method here
+        public int GetAge()
+        {
+            return DateTime.Now.Year - BirthYear;
+        }
     }
 }
