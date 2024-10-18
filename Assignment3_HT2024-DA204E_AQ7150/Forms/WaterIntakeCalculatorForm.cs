@@ -1,4 +1,7 @@
-﻿using Assignment3_HT2024_DA204E_AQ7150.Classes;
+﻿// Written by: Henrik Henriksson(7150)
+// Ignore Spelling: AQ
+
+using Assignment3_HT2024_DA204E_AQ7150.Classes;
 using Assignment3_HT2024_DA204E_AQ7150.Enums;
 using System;
 using System.Collections.Generic;
@@ -27,10 +30,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Forms
         private RadioButton rdoImperial;
         private Panel pnlWaterIntakeCalculator;
         private double dailyWaterIntake;
+        private Person person;
 
-        public WaterIntakeCalculatorForm()
+        public WaterIntakeCalculatorForm(Person person)
         {
             InitializeComponent();
+            this.person = person;
             InitializeWaterIntakeGUI();
         }
 
@@ -353,8 +358,15 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Forms
                 int birthYear = int.Parse(txtBirthYear.Text);
 
                 // create person
-                Person person = new Person(name, height, weight, gender, activityLevel, birthYear);
+                // Person person = new Person(name, height, weight, gender, activityLevel, birthYear);
 
+                // assign values to the Person object:
+                person.Name = name;
+                person.Height = height;
+                person.Weight = weight;
+                person.BirthYear = birthYear;
+                person.Gender = gender;
+                person.ActivityLevel = activityLevel;
 
                 // create watercalculator instance and insert person
                 WaterIntakeCalculator waterIntakeCalculator = new WaterIntakeCalculator(person);

@@ -12,14 +12,12 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 {
     public partial class MainForm : Form
     {
-
-
-        
-
+        private Person person;
 
         public MainForm()
         {
             InitializeComponent();
+            this.person = new Person(); // use empty constructor
             InitializeGUI();
 
         }
@@ -82,13 +80,13 @@ namespace Assignment3_HT2024_DA204E_AQ7150
 
         private void BtnWaterIntakeCalculator_Click(object? sender, EventArgs e)
         {
-           WaterIntakeCalculatorForm waterIntakeCalculatorForm = new WaterIntakeCalculatorForm();
+           WaterIntakeCalculatorForm waterIntakeCalculatorForm = new WaterIntakeCalculatorForm(person);
             waterIntakeCalculatorForm.ShowDialog();
         }
 
         private void BtnRetirementCalculator_Click(object sender, EventArgs e)
         {
-            RetirementCalculatorForm retirementForm = new RetirementCalculatorForm();
+            RetirementCalculatorForm retirementForm = new RetirementCalculatorForm(person);
             retirementForm.ShowDialog();
         }
     }

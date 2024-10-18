@@ -2,12 +2,6 @@
 // Ignore Spelling: AQ
 
 using Assignment3_HT2024_DA204E_AQ7150.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 
 // height = height * 12.0 + inches; all in inch
@@ -82,11 +76,11 @@ namespace Assignment3_HT2024_DA204E_AQ7150.Classes
         }
         private double AdjustForAge(double intake, Person person)
         {
-            if (GetAge(person) < AgeLow)
+            if (person.GetAge() < AgeLow)
             {
                 return intake * AgeAdjustmentUnder30;
             }
-            else if (GetAge(person) > AgeHigh)
+            else if (person.GetAge() > AgeHigh)
             {
                 return intake * AgeAdjustmentOver55;
             }
