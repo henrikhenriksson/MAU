@@ -1,6 +1,6 @@
 ﻿namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 {
-    partial class AddGuestForm
+    partial class AddOrUpdateGuestForm
     {
         /// <summary>
         /// Required designer variable.
