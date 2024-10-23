@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// written by Henrik Henriksson(AQ7150)
 
 namespace Assignment4_HT2024_DA204E_AQ7150.Classes
 {
-    internal class EventManager
+    public class EventManager
     {
 
 
@@ -50,9 +46,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             {
                 if (numOfElems < guestList.Length)
                 {
-                    Guest newGuest = new Guest(firstName, lastName);
-
-                    guestList[numOfElems] = newGuest;
+                    guestList[numOfElems] = new Guest(firstName, lastName);
                     numOfElems++;
                     return true;
 
