@@ -31,12 +31,12 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
         }
         public string LastName
         {
-            get { return LastName; }
+            get { return lastName; }
             set
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    firstName = value;
+                    lastName = value;
                 }
                 else
                 {

@@ -137,18 +137,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             };
             btnOpenGuestForm.Click += BtnOpenGuestForm_Click;
             mainPanel.Controls.Add(btnOpenGuestForm);
-
-            ListBox lstGuests = new()
-            {
-                Font = commonFont,
-                ForeColor = commonForeColor,
-                BackColor = commonBackColor,
-                Name = "lstGuests",
-                Location = new Point(400, 20),
-                Size = new Size(300, 320)
-            };
-            mainPanel.Controls.Add(lstGuests);
-
+          
             btnRemoveGuest = new()
             {
                 Font = commonFont,
@@ -258,6 +247,9 @@ namespace Assignment4_HT2024_DA204E_AQ7150
 
             lstGuests = new ListBox
             {
+                Font = commonFont,
+                ForeColor = commonForeColor,
+                BackColor = commonBackColor,
                 Name = "lstGuests",
                 Location = new System.Drawing.Point(400, 20),
                 Size = new System.Drawing.Size(300, 320)
@@ -266,6 +258,21 @@ namespace Assignment4_HT2024_DA204E_AQ7150
 
 
 
+        }
+
+        private void UpdateGuestList()
+        {
+            if (eventManager != null && lstGuests != null)
+            {
+                lstGuests.Items.Clear();
+                foreach (string guest in eventManager.GetGuestList())
+                {
+                    if (!string.IsNullOrEmpty(guest))
+                    {
+                        lstGuests.Items.Add(guest);
+                    }
+                }
+            }
         }
 
         private void UpdateFinancials()
@@ -295,7 +302,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
                     using AddOrUpdateGuestForm updateGuestForm = new AddOrUpdateGuestForm(eventManager, lstGuests.SelectedIndex);
 
                     updateGuestForm.ShowDialog();
-                    UpdateFinancials();
+                    UpdateGuestList();
                 }
                 else
                 {
@@ -304,7 +311,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             }
             catch (Exception ex)
             {
-                MessageBox.Show("You must have at least one guest before updating","No guest to update", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("You must have at least one guest before updating", "No guest to update", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
 
         }
@@ -313,81 +320,81 @@ namespace Assignment4_HT2024_DA204E_AQ7150
         {
 
 
-                if (lstGuests != null && lstGuests.SelectedIndex >= 0)
+            if (lstGuests != null && lstGuests.SelectedIndex >= 0)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to remove this guest?", "Confirm Removal", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    DialogResult result = MessageBox.Show("Are you sure you want to remove this guest?", "Confirm Removal", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
+                    if (eventManager.RemoveGuest(lstGuests.SelectedIndex))
                     {
-                        if (eventManager.RemoveGuest(lstGuests.SelectedIndex))
-                        {
-                            MessageBox.Show("Guest removed Succesfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            UpdateFinancials();
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("Unable to remove the selected guest.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Guest removed Succesfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UpdateGuestList();
 
                     }
+                    else
+                    {
+                        MessageBox.Show("Unable to remove the selected guest.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                 }
-                else
-                {
-                    MessageBox.Show("Please select a guest to remove.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            
-           
+            }
+            else
+            {
+                MessageBox.Show("Please select a guest to remove.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+
         }
 
         private void BtnOpenGuestForm_Click(object? sender, EventArgs e)
         {
             using AddOrUpdateGuestForm addGuestForm = new(eventManager); // use with resources to handle disposable.
             addGuestForm.ShowDialog();
-            UpdateFinancials();
+            UpdateGuestList();
 
         }
 
         private void BtnCreateList_Click(object? sender, EventArgs e)
         {
 
-          
-
-                // get inputs
-                // Parse 
-                if (!int.TryParse(txtMaxGuest.Text, out int maxGuest) || maxGuest <= 0)
-                {
-                    MessageBox.Show("Enter a valid positive number for max amount of guests", "No Guests Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (!decimal.TryParse(txtCostPerGuest.Text, out decimal costPerGuest) || costPerGuest < 0)
-                {
-                    MessageBox.Show("Please enter a valid number value for cost per guest.", "Guest Cost Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (!decimal.TryParse(txtFeePerGuest.Text, out decimal feePerGuest) || feePerGuest < 0)
-                {
-                    MessageBox.Show("Please enter a valid positive value for fee per guest.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // generate class object
-                eventManager = new(maxGuest)
-                {
-                    CostPerPerson = costPerGuest,
-                    FeePerPerson = feePerGuest
-                };
-
-                MessageBox.Show("Guest list created successfully! You can now add, update, or remove guests.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // update and enable buttons for manipulation.
 
 
-                if (eventManager.GetGuestList().Length > 0) { UpdateFinancials(); }
+            // get inputs
+            // Parse 
+            if (!int.TryParse(txtMaxGuest.Text, out int maxGuest) || maxGuest <= 0)
+            {
+                MessageBox.Show("Enter a valid positive number for max amount of guests", "No Guests Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-                btnUpdateGuest.Enabled = true;
-                btnRemoveGuest.Enabled = true;
-                btnOpenGuestForm.Enabled = true;
-                btnCalculateFinancials.Enabled = true;
+            if (!decimal.TryParse(txtCostPerGuest.Text, out decimal costPerGuest) || costPerGuest < 0)
+            {
+                MessageBox.Show("Please enter a valid number value for cost per guest.", "Guest Cost Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!decimal.TryParse(txtFeePerGuest.Text, out decimal feePerGuest) || feePerGuest < 0)
+            {
+                MessageBox.Show("Please enter a valid positive value for fee per guest.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // generate class object
+            eventManager = new(maxGuest)
+            {
+                CostPerPerson = costPerGuest,
+                FeePerPerson = feePerGuest
+            };
+
+            MessageBox.Show("Guest list created successfully! You can now add, update, or remove guests.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // update and enable buttons for manipulation.
+
+
+            if (eventManager.GetGuestList().Length > 0) { UpdateFinancials(); }
+
+            btnUpdateGuest.Enabled = true;
+            btnRemoveGuest.Enabled = true;
+            btnOpenGuestForm.Enabled = true;
+            btnCalculateFinancials.Enabled = true;
 
         }
     }

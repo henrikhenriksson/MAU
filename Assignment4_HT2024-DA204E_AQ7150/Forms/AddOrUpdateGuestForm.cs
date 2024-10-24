@@ -117,15 +117,10 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
             Close();
 
-
-
         }
 
         private void AddNewGuest(string firstName, string lastName)
         {
-
-
-
 
             if (eventManager.AddGuest(firstName, lastName))
             {

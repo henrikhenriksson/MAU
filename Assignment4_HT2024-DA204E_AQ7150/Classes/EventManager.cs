@@ -66,7 +66,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
 
         public bool RemoveGuest(int index)
         {
-            if (index > 0 && index < numOfElems)
+            if (index >= 0 && index < numOfElems)
             {
                 guestList[index] = null;
                 MoveElementsOneStepLeft(index);
@@ -98,7 +98,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
         }
 
 
-        // as an entry is removed, the others will need to be adjusted accordingly.
+        // as an entry is removed, the others will need to be adjusted.
         private void MoveElementsOneStepLeft(int guestEntryIndex)
         {
             for (int i = guestEntryIndex; i < numOfElems; i++)
