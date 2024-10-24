@@ -146,6 +146,26 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             return guestNames;
 
         }
+        // check to make sure no duplicate guests are added.
+        // if there are 2 people with the same name, middle names can be used do differentiate them.
+        public bool GuestExists(string firstName, string lastName)
+        {
+
+            if(guestList == null || guestList.Count() == 0) { return false; } // no guests can be duplicates if no guests have been added.
+
+            foreach (Guest guest in guestList)
+            {
+                if (guest == null) continue;
+                
+                if (guest.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                    guest.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
     }
 }
