@@ -8,8 +8,12 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
 
         private Guest[] guestList;
         private int numOfElems;
-        private double costPerPerson;
-        private double feePerPerson;
+
+        // https://learn.microsoft.com/en-us/answers/questions/709941/double-or-decimal-for-amount
+        // decimal seems to be preferred over double for currency amounts.
+        private decimal costPerPerson;
+        private decimal feePerPerson;
+
 
         public EventManager(int Size)
         {
@@ -17,7 +21,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             numOfElems = 0;
         }
 
-        public double CostPerPerson
+        public decimal CostPerPerson
         {
             get => costPerPerson;
 
@@ -30,7 +34,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             }
         }
 
-        public double FeePerPerson
+        public decimal FeePerPerson
         {
             get { return feePerPerson; }
             set
@@ -107,17 +111,17 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
 
         }
 
-        public double GetTotalCost()
+        public decimal GetTotalCost()
         {
             return numOfElems * CostPerPerson;
         }
 
-        public double GetTotalRevenue()
+        public decimal GetTotalRevenue()
         {
             return numOfElems * FeePerPerson;
         }
 
-        public double GetSurplusOrDeficit()
+        public decimal GetSurplusOrDeficit()
         {
 
             return GetTotalRevenue() - GetTotalCost();
