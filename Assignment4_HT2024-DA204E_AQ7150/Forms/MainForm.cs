@@ -11,6 +11,15 @@ namespace Assignment4_HT2024_DA204E_AQ7150
 
         private EventManager eventManager;
 
+        // Made these into class fields as they are accessed across different methods.
+        private ListBox lstGuests;
+        private TextBox txtTotalCost;
+        private TextBox txtTotalRevenue;
+        private TextBox txtSurplusOrDeficit;
+        private TextBox txtMaxGuest;
+        private TextBox txtCostPerGuest;
+        private TextBox txtFeePerGuest;
+
         public MainForm()
         {
             InitializeComponent();
@@ -38,7 +47,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
                 AutoSize = true,
             };
             mainPanel.Controls.Add(lblMaxGuests);
-            TextBox txtMaxGuest = new()
+            txtMaxGuest = new()
             {
                 Name = "txtMaxGuests",
                 Location = new Point(150, 20),
@@ -56,7 +65,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             };
             mainPanel.Controls.Add(lblCostPerGuest);
 
-            TextBox txtCostPerGuest = new()
+            txtCostPerGuest = new()
             {
                 Name = "txtCostPerGuest",
                 Location = new Point(150, 60),
@@ -72,7 +81,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             };
             mainPanel.Controls.Add(lblFeePerGuest);
 
-            TextBox txtFeePerGuest = new()
+            txtFeePerGuest = new()
             {
                 Name = "txtFeePerGuest",
                 Location = new Point(150, 100),
@@ -132,7 +141,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             };
             mainPanel.Controls.Add(lblTotalCost);
 
-            TextBox txtTotalCost = new TextBox
+            txtTotalCost = new TextBox
             {
                 Name = "txtTotalCost",
                 Location = new System.Drawing.Point(150, 250),
@@ -149,7 +158,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             };
             mainPanel.Controls.Add(lblTotalRevenue);
 
-            TextBox txtTotalRevenue = new TextBox
+            txtTotalRevenue = new TextBox
             {
                 Name = "txtTotalRevenue",
                 Location = new System.Drawing.Point(150, 290),
@@ -166,7 +175,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             };
             mainPanel.Controls.Add(lblSurplusOrDeficit);
 
-            TextBox txtSurplusOrDeficit = new TextBox
+            txtSurplusOrDeficit = new TextBox
             {
                 Name = "txtSurplusOrDeficit",
                 Location = new System.Drawing.Point(150, 330),
@@ -184,22 +193,44 @@ namespace Assignment4_HT2024_DA204E_AQ7150
             btnCalculateFinancials.Click += new EventHandler(this.btnCalculateFinancials_Click);
             mainPanel.Controls.Add(btnCalculateFinancials);
 
+            lstGuests = new ListBox
+            {
+                Name = "lstGuests",
+                Location = new System.Drawing.Point(400, 20),
+                Size = new System.Drawing.Size(300, 320)
+            };
+            mainPanel.Controls.Add(lstGuests);
+
+
+
+        }
+
+        private void UpdateFinancials()
+        {
+            if (eventManager != null)
+            {
+                txtTotalCost.Text = eventManager.GetTotalCost().ToString("C");
+                txtTotalRevenue.Text = eventManager.GetTotalRevenue().ToString("C");
+                txtSurplusOrDeficit.Text = eventManager.GetSurplusOrDeficit().ToString("C");
+            }
+
+
         }
 
         private void btnCalculateFinancials_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            UpdateFinancials();
         }
 
         private void BtnUpdateGuest_Click(object? sender, EventArgs e)
         {
-            ListBox lstGuests = (ListBox)this.Controls.Find("lstGuests", true)[0];
 
             if (lstGuests.SelectedIndex >= 0)
             {
                 using AddOrUpdateGuestForm updateGuestForm = new AddOrUpdateGuestForm(eventManager, lstGuests.SelectedIndex);
 
                 updateGuestForm.ShowDialog();
+                UpdateFinancials();
             }
             else
             {
@@ -211,7 +242,6 @@ namespace Assignment4_HT2024_DA204E_AQ7150
 
         private void BtnRemoveGuest_Click(object? sender, EventArgs e)
         {
-            ListBox lstGuests = (ListBox)Controls.Find("lstGuests", true)[0];
 
             if (lstGuests.SelectedIndex >= 0)
             {
@@ -221,7 +251,10 @@ namespace Assignment4_HT2024_DA204E_AQ7150
                     if (eventManager.RemoveGuest(lstGuests.SelectedIndex))
                     {
                         MessageBox.Show("Guest removed Succesfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    } else
+                        UpdateFinancials();
+
+                    }
+                    else
                     {
 
                         MessageBox.Show("Unable to remove the selected guest.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -239,11 +272,48 @@ namespace Assignment4_HT2024_DA204E_AQ7150
         {
             using AddOrUpdateGuestForm addGuestForm = new(eventManager); // use with resources to handle disposable.
             addGuestForm.ShowDialog();
+            UpdateFinancials();
+
         }
 
         private void BtnCreateList_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+
+                // get inputs
+                // Parse 
+                if (!int.TryParse(txtMaxGuest.Text, out int maxGuest) || maxGuest <= 0)
+                {
+                    MessageBox.Show("Enter a valid positive number for max amount of guests", "No Guests Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (!decimal.TryParse(txtCostPerGuest.Text, out decimal costPerGuest) || costPerGuest < 0)
+                {
+                    MessageBox.Show("Please enter a valid number value for cost per guest.", "Guest Cost Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!decimal.TryParse(txtFeePerGuest.Text, out decimal feePerGuest) || feePerGuest < 0)
+                {
+                    MessageBox.Show("Please enter a valid positive value for fee per guest.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                eventManager = new(maxGuest);
+                eventManager.CostPerPerson = costPerGuest;
+                eventManager.FeePerPerson = feePerGuest;
+
+                MessageBox.Show("Guest list created successfully! You can now add, update, or remove guests.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UpdateFinancials();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error has occurred {ex.Message}", "Error Creating List", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+            }
         }
     }
 }
