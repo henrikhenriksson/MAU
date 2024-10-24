@@ -19,6 +19,9 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
         private TextBox txtLastName;
         private int? guestIndex;
 
+        private Font commonFont = new Font("Arial", 10, FontStyle.Regular);
+        private Color commonBackColor = Color.DarkGray;
+        private Color commonForeColor = Color.Black;
 
         public AddOrUpdateGuestForm(EventManager eventManager, int guestIndex)
         {
@@ -36,11 +39,14 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
         private void initializeGUI()
         {
+            ForeColor = commonForeColor;
             Text = guestIndex.HasValue ? "Update Guest" : "Add New Guest";
             Size = new Size(400, 250);
 
             Label lblFirstName = new Label
             {
+                Font = commonFont,
+                ForeColor = commonForeColor,
                 Text = "First Name:",
                 Location = new Point(20, 20),
                 AutoSize = true
@@ -49,6 +55,9 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
             txtFirstName = new TextBox
             {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
                 Location = new Point(120, 20),
                 Size = new Size(200, 20)
             };
@@ -57,6 +66,8 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
             Label lblLastName = new Label
             {
+                Font = commonFont,
+                ForeColor = commonForeColor,
                 Text = "Last Name:",
                 Location = new Point(20, 60),
                 AutoSize = true
@@ -65,6 +76,9 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
             txtLastName = new TextBox
             {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
                 Location = new Point(120, 60),
                 Size = new Size(200, 20)
             };
@@ -72,6 +86,9 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
             Button btnAddOrUpdate = new Button
             {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
                 Text = guestIndex.HasValue ? "Update" : "Add Guest",
                 Location = new Point(120, 100),
                 Size = new Size(80, 30),
@@ -82,6 +99,9 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
             Button btnCancel = new Button
             {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
                 Text = "Cancel",
                 Location = new Point(240, 100),
                 Size = new Size(80, 30)
@@ -94,39 +114,18 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
         private void BtnCancel_Click(object? sender, EventArgs e)
         {
-            string firstName = txtFirstName.Text;
-            string lastName = txtLastName.Text;
+
+            Close();
 
 
-
-
-
-            try
-            {
-
-                if (guestIndex.HasValue)
-                {
-                    UpdateExistingGuest(firstName, lastName);
-
-                }
-                else
-                {
-                    AddNewGuest(firstName, lastName);
-                }
-
-
-
-
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
         }
 
         private void AddNewGuest(string firstName, string lastName)
         {
+
+
+
 
             if (eventManager.AddGuest(firstName, lastName))
             {
@@ -150,7 +149,42 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 
         private void BtnAdd_Click(object? sender, EventArgs e)
         {
-            Close();
+            string firstName = txtFirstName.Text;
+            string lastName = txtLastName.Text;
+
+            if(string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
+            {
+                MessageBox.Show("Please enter a first and a last name", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (eventManager.GuestExists(firstName, lastName))
+            {
+                MessageBox.Show("A guest by that name has already been added.\n Two guests by the same name? Consider adding an initial to differentiate them.", "Duplicate Name", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            try
+            {
+
+                if (guestIndex.HasValue)
+                {
+                    UpdateExistingGuest(firstName, lastName);
+
+                }
+                else
+                {
+                    AddNewGuest(firstName, lastName);
+                }
+
+
+
+
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
