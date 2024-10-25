@@ -1,13 +1,6 @@
-﻿using Assignment4_HT2024_DA204E_AQ7150.Classes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// written by Henrik Henriksson (AQ7150)
+
+using Assignment4_HT2024_DA204E_AQ7150.Classes;
 
 namespace Assignment4_HT2024_DA204E_AQ7150.Forms
 {
