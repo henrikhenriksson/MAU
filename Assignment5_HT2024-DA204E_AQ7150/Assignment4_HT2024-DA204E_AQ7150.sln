@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOrganizerApp", "EventOrganizerApp.csproj", "{C3345789-275E-454B-A37A-E9E171D663C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment4_HT2024-DA204E_AQ7150", "Assignment4_HT2024-DA204E_AQ7150.csproj", "{6AE3CD67-7BC7-4D56-9E98-47E55BE0996E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C3345789-275E-454B-A37A-E9E171D663C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3345789-275E-454B-A37A-E9E171D663C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3345789-275E-454B-A37A-E9E171D663C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3345789-275E-454B-A37A-E9E171D663C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE3CD67-7BC7-4D56-9E98-47E55BE0996E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE3CD67-7BC7-4D56-9E98-47E55BE0996E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE3CD67-7BC7-4D56-9E98-47E55BE0996E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE3CD67-7BC7-4D56-9E98-47E55BE0996E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8C1FED97-7F22-4B75-8452-75228EB5E964}
+		SolutionGuid = {2ADF2983-4B8F-44CD-A30D-32AAD2EF96E5}
 	EndGlobalSection
 EndGlobal
