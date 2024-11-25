@@ -8,28 +8,42 @@ namespace EventOrganizerApp.Classes
 {
     internal class Participant
     {
-        List<Participant> participants;
+        // Fields
+        private string firstName;
+        private string lastName;
+        private Address address;
 
-        public bool AddParticipant()
+        // Constructor
+        public Participant(string firstName, string lastName, Address address)
         {
-
-            return false;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.address = address;
         }
 
-        public bool RemoveParticipant()
+        // Properties
+        public string FirstName
         {
-            return false
+            get { return firstName; }
+            set { if (!string.IsNullOrEmpty(value)) firstName = value; }
         }
 
-        public void GetParticipantAt(int index)
+        public string LastName
         {
-
+            get { return lastName; }
+            set { if (!string.IsNullOrEmpty(value)) lastName = value; }
         }
 
-        public void GetparticipantInfo()
+        public Address Address
         {
-
+            get { return address; }
+            set { if (value != null) address = value; }
         }
 
+        // Method to return formatted participant information
+        public override string ToString()
+        {
+            return $"{lastName.ToUpper()}, {firstName} - Address: {address}";
+        }
     }
 }
