@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EventOrganizerApp.Classes
 {
-    internal class Address
+    public class Address
     {
         private string _street;
         private string _city;
@@ -79,10 +80,10 @@ namespace EventOrganizerApp.Classes
             if (address == null)
                 throw new ArgumentNullException(nameof(address));
 
-            _street = address._street;
-            _city = address._city;
-            _postalCode = address._postalCode;
-            _country = address._country;
+            Street = address._street;
+            City = address._city;
+            PostalCode = address._postalCode;
+            Country = address._country;
         }
 
         public Address(string street, string city, string postalCode, Countries country)
@@ -99,7 +100,7 @@ namespace EventOrganizerApp.Classes
 
         private bool ValidatePostalCode(string postalCodeToValidate)
         {
-            return System.Text.RegularExpressions.Regex.IsMatch(postalCodeToValidate, "^\\d{3}\\s?\\d{2}$");
+            return Regex.IsMatch(postalCodeToValidate, "^\\d{3}\\s?\\d{2}$");
         }
         public override string ToString()
         {
