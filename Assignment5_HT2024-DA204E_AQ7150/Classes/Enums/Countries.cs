@@ -176,7 +176,7 @@ using System.Text;
         Sudan, 
         Suriname,
         Swaziland,
-        Sverige,
+        Sweden,
         Switzerland,
         Syria,
         Taiwan, 
