@@ -1,49 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// written by Henrik Henriksson(AQ7150)
 
-namespace EventOrganizerApp.Classes
+
+using EventOrganizerApp.Classes;
+
+namespace Assignment4_HT2024_DA204E_AQ7150.Classes
 {
-    internal class Participant
+    public class Participant
     {
-        // Fields
-        private string firstName;
-        private string lastName;
-        private Address address;
+        private string _firstName;
+        private string _lastName;
+        private Address _address;
 
-        // Constructor
         public Participant(string firstName, string lastName, Address address)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
+            _firstName = firstName;
+            _lastName = lastName;
+            _address = address;
+           
+
         }
 
-        // Properties
         public string FirstName
         {
-            get { return firstName; }
-            set { if (!string.IsNullOrEmpty(value)) firstName = value; }
+            get { return _firstName; }
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _firstName = value;
+                }
+                else
+                {
+                    throw new ArgumentException("First name cannot be empty");
+                }
+            }
         }
-
         public string LastName
         {
-            get { return lastName; }
-            set { if (!string.IsNullOrEmpty(value)) lastName = value; }
+            get { return _lastName; }
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _lastName = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Last name cannot be empty");
+                }
+            }
         }
 
-        public Address Address
+        public Address _Address
         {
-            get { return address; }
-            set { if (value != null) address = value; }
+            get { return _address; }
+            set
+            {
+                if (value != null)
+                {
+                    _address = value;
+                }
+            }
         }
 
-        // Method to return formatted participant information
-        public override string ToString()
-        {
-            return $"{lastName.ToUpper()}, {firstName} - Address: {address}";
-        }
+        public string GetFullName() { return $"{_lastName.ToUpper()}, {_firstName}"; }
+
     }
 }
