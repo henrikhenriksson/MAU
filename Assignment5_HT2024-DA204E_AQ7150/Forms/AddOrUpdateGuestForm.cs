@@ -1,40 +1,35 @@
 ﻿// written by Henrik Henriksson (AQ7150)
 
-using Assignment4_HT2024_DA204E_AQ7150.Classes;
+using Assignment5_HT2024_DA204E_AQ7150.Classes;
+using EventOrganizerApp.Classes;
 
-namespace Assignment4_HT2024_DA204E_AQ7150.Forms
+namespace Assignment5_HT2024_DA204E_AQ7150.Forms
 {
     public partial class AddOrUpdateGuestForm : Form
     {
-
         private EventManager eventManager;
-        private TextBox txtFirstName;
-        private TextBox txtLastName;
-        private int? guestIndex;
+        private Participant participant;
+        private bool isUpdateMode;
 
         private Font commonFont = new Font("Arial", 10, FontStyle.Regular);
         private Color commonBackColor = Color.DarkGray;
         private Color commonForeColor = Color.Black;
 
-        public AddOrUpdateGuestForm(EventManager eventManager, int guestIndex)
-        {
-            this.eventManager = eventManager;
-            this.guestIndex = guestIndex;
-            initializeGUI();
-        }
-
-        public AddOrUpdateGuestForm(EventManager eventManager)
+        public AddOrUpdateGuestForm(EventManager eventManager, Participant participant)
         {
             InitializeComponent();
             this.eventManager = eventManager;
+            this.participant = participant;
+            isUpdateMode = participant != null;
             initializeGUI();
         }
 
         private void initializeGUI()
         {
             ForeColor = commonForeColor;
-            Text = guestIndex.HasValue ? "Update Guest" : "Add New Guest";
-            Size = new Size(400, 250);
+            BackColor = Color.DarkSlateGray;
+            Text = isUpdateMode ? "Update Guest" : "Add New Guest";
+            Size = new Size(400, 400);
 
             Label lblFirstName = new Label
             {
@@ -46,16 +41,16 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
             };
             Controls.Add(lblFirstName);
 
-            txtFirstName = new TextBox
+            TextBox txtFirstName = new TextBox
             {
                 Font = commonFont,
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
-                Location = new Point(120, 20),
-                Size = new Size(200, 20)
+                Location = new Point(130, 20),
+                Size = new Size(150, 20)
             };
             Controls.Add(txtFirstName);
-
+            if (isUpdateMode) txtFirstName.Text = participant.FirstName;
 
             Label lblLastName = new Label
             {
@@ -67,28 +62,118 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
             };
             Controls.Add(lblLastName);
 
-            txtLastName = new TextBox
+            TextBox txtLastName = new TextBox
             {
                 Font = commonFont,
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
-                Location = new Point(120, 60),
+                Location = new Point(130, 60),
                 Size = new Size(200, 20)
             };
+            if (isUpdateMode) txtLastName.Text = participant.LastName;
             Controls.Add(txtLastName);
 
-            Button btnAddOrUpdate = new Button
+            Label lblStreet = new Label()
             {
                 Font = commonFont,
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
-                Text = guestIndex.HasValue ? "Update" : "Add Guest",
-                Location = new Point(120, 100),
-                Size = new Size(80, 30),
-
+                AutoSize = true,
+                Text = "Street:",
+                Location = new Point(20, 100)
             };
-            btnAddOrUpdate.Click += BtnAdd_Click;
-            Controls.Add(btnAddOrUpdate);
+            Controls.Add(lblStreet);
+
+            TextBox txtStreet = new TextBox()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                Location = new Point(130, 100),
+                Size = new Size(200, 20)
+            };
+            if (isUpdateMode) txtStreet.Text = participant.Address.Street;
+            Controls.Add(txtStreet);
+
+            Label lblCity = new Label()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                AutoSize = true,
+                Text = "City:",
+                Location = new Point(20, 140)
+            };
+            Controls.Add(lblCity);
+
+            TextBox txtCity = new TextBox()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                Location = new Point(130, 140),
+                Size = new Size(150, 20)
+            };
+            if (isUpdateMode) txtCity.Text = participant.Address.City;
+            Controls.Add(txtCity);
+
+            Label lblPostalCode = new Label()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                AutoSize = true,
+                Text = "Postal Code:",
+                Location = new Point(20, 180)
+            };
+            Controls.Add(lblPostalCode);
+
+            TextBox txtPostalCode = new TextBox()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                Location = new Point(130, 180),
+                Size = new Size(100, 20)
+            };
+            if (isUpdateMode) txtPostalCode.Text = participant.Address.PostalCode;
+            Controls.Add(txtPostalCode);
+
+            Label lblCountry = new Label()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                AutoSize = true,
+                Text = "Country:",
+                Location = new Point(20, 220)
+            };
+            Controls.Add(lblCountry);
+
+            ComboBox countryComboBox = new ComboBox()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                Location = new Point(130, 220),
+                Size = new Size(150, 20),
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            countryComboBox.Items.AddRange(Enum.GetNames(typeof(Countries)));
+            if (isUpdateMode) countryComboBox.SelectedItem = participant.Address.Country.ToString();
+            Controls.Add(countryComboBox);
+
+            Button btnSave = new Button
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                Text = "Save",
+                Location = new Point(50, 270),
+                Size = new Size(100, 30)
+            };
+            btnSave.Click += (sender, e) => SaveParticipant(txtFirstName, txtLastName, txtStreet, txtCity, txtPostalCode, countryComboBox);
+            Controls.Add(btnSave);
 
             Button btnCancel = new Button
             {
@@ -96,83 +181,43 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Forms
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
                 Text = "Cancel",
-                Location = new Point(240, 100),
-                Size = new Size(80, 30)
+                Location = new Point(200, 270),
+                Size = new Size(100, 30)
             };
-            btnCancel.Click += BtnCancel_Click;
+            btnCancel.Click += (sender, e) => this.Close();
             Controls.Add(btnCancel);
-
-
         }
 
-        private void BtnCancel_Click(object? sender, EventArgs e)
-        {
-
-            Close();
-
-        }
-
-        private void AddNewGuest(string firstName, string lastName)
-        {
-
-            if (eventManager.AddGuest(firstName, lastName))
-            {
-                MessageBox.Show("Guest added Succesfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Guest List is Full", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-        }
-
-        private void UpdateExistingGuest(string firstName, string lastName)
-        {
-            if (eventManager.UpdateGuest(guestIndex.Value, firstName, lastName))
-            {
-                MessageBox.Show("Guest updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            }
-        }
-
-        private void BtnAdd_Click(object? sender, EventArgs e)
+        private void SaveParticipant(TextBox txtFirstName, TextBox txtLastName, TextBox txtStreet, TextBox txtCity, TextBox txtPostalCode, ComboBox countryComboBox)
         {
             string firstName = txtFirstName.Text;
             string lastName = txtLastName.Text;
+            string street = txtStreet.Text;
+            string city = txtCity.Text;
+            string postalCode = txtPostalCode.Text;
+            Countries country = (Countries)Enum.Parse(typeof(Countries), countryComboBox.SelectedItem.ToString());
 
-            if(string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
+            Address address = new Address(street, city, postalCode, country);
+
+            if (isUpdateMode)
             {
-                MessageBox.Show("Please enter a first and a last name", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                participant.FirstName = firstName;
+                participant.LastName = lastName;
+                participant.Address = address;
+                MessageBox.Show("Participant updated successfully.", "Success");
             }
-
-            if (eventManager.GuestExists(firstName, lastName))
+            else
             {
-                MessageBox.Show("A guest by that name has already been added.\n Two guests by the same name? Consider adding an initial to differentiate them.", "Duplicate Name", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            try
-            {
-
-                if (guestIndex.HasValue)
+                if (!eventManager.AddParticipant(firstName, lastName, address))
                 {
-                    UpdateExistingGuest(firstName, lastName);
-
+                    MessageBox.Show("Participant already exists or invalid input.", "Error");
                 }
                 else
                 {
-                    AddNewGuest(firstName, lastName);
+                    MessageBox.Show("Participant added successfully.", "Success");
                 }
-
-
-
-
             }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            this.Close();
         }
     }
 }

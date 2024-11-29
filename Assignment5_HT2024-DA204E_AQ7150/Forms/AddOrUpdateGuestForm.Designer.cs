@@ -1,4 +1,4 @@
-﻿namespace Assignment4_HT2024_DA204E_AQ7150.Forms
+﻿namespace Assignment5_HT2024_DA204E_AQ7150.Forms
 {
     partial class AddOrUpdateGuestForm
     {
