@@ -66,7 +66,7 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             {
                 Font = commonFont,
                 BackColor = commonBackColor,
-                ForeColor = commonForeColor,
+              
                 Location = new Point(130, 60),
                 Size = new Size(200, 20)
             };
@@ -76,7 +76,6 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             Label lblStreet = new Label()
             {
                 Font = commonFont,
-                BackColor = commonBackColor,
                 ForeColor = commonForeColor,
                 AutoSize = true,
                 Text = "Street:",
@@ -98,7 +97,6 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             Label lblCity = new Label()
             {
                 Font = commonFont,
-                BackColor = commonBackColor,
                 ForeColor = commonForeColor,
                 AutoSize = true,
                 Text = "City:",
@@ -120,7 +118,6 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             Label lblPostalCode = new Label()
             {
                 Font = commonFont,
-                BackColor = commonBackColor,
                 ForeColor = commonForeColor,
                 AutoSize = true,
                 Text = "Postal Code:",
@@ -142,7 +139,6 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             Label lblCountry = new Label()
             {
                 Font = commonFont,
-                BackColor = commonBackColor,
                 ForeColor = commonForeColor,
                 AutoSize = true,
                 Text = "Country:",
