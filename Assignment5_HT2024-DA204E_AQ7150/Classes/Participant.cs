@@ -2,8 +2,9 @@
 
 
 using EventOrganizerApp.Classes;
+using System.Net;
 
-namespace Assignment4_HT2024_DA204E_AQ7150.Classes
+namespace Assignment5_HT2024_DA204E_AQ7150.Classes
 {
     public class Participant
     {
@@ -16,7 +17,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             _firstName = firstName;
             _lastName = lastName;
             _address = address;
-           
+
 
         }
 
@@ -51,7 +52,7 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             }
         }
 
-        public Address _Address
+        public Address Address
         {
             get { return _address; }
             set
@@ -63,7 +64,15 @@ namespace Assignment4_HT2024_DA204E_AQ7150.Classes
             }
         }
 
-        public string GetFullName() { return $"{_lastName.ToUpper()}, {_firstName}"; }
+       // public string ToString() { return $"{_lastName.ToUpper()}, {_firstName}"; }
+
+
+        public override string ToString()
+        {
+            return $"{LastName.ToUpper()}, {FirstName} - Address: {Address}";
+        }
+
+
 
     }
 }
