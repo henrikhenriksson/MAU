@@ -1,6 +1,6 @@
-﻿namespace Assignment4_HT2024_DA204E_AQ7150
+﻿namespace Assignment5_HT2024_DA204E_AQ7150
 {
-    partial class MainForm
+    partial class EventDetailsForm
     {
         /// <summary>
         ///  Required designer variable.
