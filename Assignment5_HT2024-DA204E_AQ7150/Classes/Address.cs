@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
+﻿// written by Henrik Henriksson(AQ7150)
+
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace EventOrganizerApp.Classes
 {

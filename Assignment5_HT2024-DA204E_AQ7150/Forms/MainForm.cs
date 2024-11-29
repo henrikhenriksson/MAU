@@ -1,4 +1,6 @@
-﻿using Assignment5_HT2024_DA204E_AQ7150.Classes;
+﻿// written by Henrik Henriksson(AQ7150)
+
+using Assignment5_HT2024_DA204E_AQ7150.Classes;
 
 namespace Assignment5_HT2024_DA204E_AQ7150.Forms
 {

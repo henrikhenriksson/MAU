@@ -1,9 +1,6 @@
-﻿using Assignment5_HT2024_DA204E_AQ7150.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// written by Henrik Henriksson(AQ7150)
+
+using Assignment5_HT2024_DA204E_AQ7150.Classes;
 
 namespace EventOrganizerApp.Classes.Managers
 {

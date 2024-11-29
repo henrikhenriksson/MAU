@@ -64,7 +64,6 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Classes
             }
         }
 
-       // public string ToString() { return $"{_lastName.ToUpper()}, {_firstName}"; }
 
 
         public override string ToString()
