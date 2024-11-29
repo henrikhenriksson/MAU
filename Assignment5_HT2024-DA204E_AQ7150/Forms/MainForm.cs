@@ -10,6 +10,8 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
         // i hope these fields are OK as it's very handy to have the controls accessible directly in click methods
         private TextBox txtCostPerGuest;
         private TextBox txtFeePerGuest;
+        private TextBox txtEventTitle;
+
 
         public MainForm()
         {
@@ -26,23 +28,44 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
 
             ForeColor = commonForeColor;
             Text = "Event Organizer";
-            Size = new Size(400, 300);
+            Size = new Size(400, 350);
 
             Panel mainPanel = new()
             {
                 Size = new Size(380, 260),
-                Location = new Point((this.ClientSize.Width - 380) / 2, (this.ClientSize.Height - 260) / 2),
+                Location = new Point((this.ClientSize.Width - 380) / 2, (this.ClientSize.Height - 310) / 2),
                 BorderStyle = BorderStyle.FixedSingle,
                 BackColor = Color.DarkSlateGray
             };
             Controls.Add(mainPanel);
+
+
+            Label lblEventTitle = new Label()
+            {
+                Text = "Event Title:",
+                Font = commonFont,
+                ForeColor = commonForeColor,
+                Location = new Point(20, 20),
+                AutoSize = true
+            };
+            mainPanel.Controls.Add(lblEventTitle);
+
+            txtEventTitle = new TextBox()
+            {
+                Font = commonFont,
+                BackColor = commonBackColor,
+                ForeColor = commonForeColor,
+                Location = new Point(150, 20),
+                Size = new Size(150, 25)
+            };
+            mainPanel.Controls.Add(txtEventTitle);
 
             Label lblCostPerGuest = new()
             {
                 Text = "Cost per Guest:",
                 Font = commonFont,
                 ForeColor = commonForeColor,
-                Location = new Point(20, 20),
+                Location = new Point(20, 60),
                 AutoSize = true
             };
             mainPanel.Controls.Add(lblCostPerGuest);
@@ -52,7 +75,7 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
                 Font = commonFont,
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
-                Location = new Point(150, 20),
+                Location = new Point(150, 60),
                 Size = new Size(150, 25) 
             };
             mainPanel.Controls.Add(txtCostPerGuest);
@@ -62,7 +85,7 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
                 Text = "Fee per Guest:",
                 Font = commonFont,
                 ForeColor = commonForeColor,
-                Location = new Point(20, 60),
+                Location = new Point(20, 100),
                 AutoSize = true
             };
             mainPanel.Controls.Add(lblFeePerGuest);
@@ -72,7 +95,7 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
                 Font = commonFont,
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
-                Location = new Point(150, 60), 
+                Location = new Point(150, 100), 
                 Size = new Size(150, 25) 
             };
             mainPanel.Controls.Add(txtFeePerGuest);
@@ -84,7 +107,7 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
                 Font = commonFont,
                 BackColor = commonBackColor,
                 ForeColor = commonForeColor,
-                Location = new Point(20, 100),
+                Location = new Point(20, 140),
                 Size = new Size(300, 30)
             };
             btnOpenEventOrganizer.Click += BtnOpenEventOrganizer_Click;
@@ -94,11 +117,19 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
         private void BtnOpenEventOrganizer_Click(object? sender, EventArgs e)
         {
 
+            if (string.IsNullOrWhiteSpace(txtEventTitle.Text))
+            {
+                MessageBox.Show("Please enter a valid title for the event.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             if (decimal.TryParse(txtCostPerGuest.Text, out decimal costPerGuest) && costPerGuest > 0 &&
                 decimal.TryParse(txtFeePerGuest.Text, out decimal feePerGuest) && feePerGuest > 0)
             {
                eventManager = new EventManager(costPerGuest, feePerGuest);
-                OpenEventManagerForm();
+                string title = txtEventTitle.Text;
+                OpenEventManagerForm(title);
             }
             else
             {
@@ -106,9 +137,9 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             }
         }
 
-        private void OpenEventManagerForm()
+        private void OpenEventManagerForm(string title)
         {
-            EventDetailsForm eventDetailsForm = new(eventManager);
+            EventDetailsForm eventDetailsForm = new(eventManager,title);
 
             eventDetailsForm.ShowDialog();
         }

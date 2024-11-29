@@ -3,6 +3,7 @@
 
 using Assignment5_HT2024_DA204E_AQ7150.Classes;
 using Assignment5_HT2024_DA204E_AQ7150.Forms;
+using System.Reflection;
 
 namespace Assignment5_HT2024_DA204E_AQ7150
 {
@@ -25,19 +26,20 @@ namespace Assignment5_HT2024_DA204E_AQ7150
         private TextBox txtTotalRevenue;
         private TextBox txtSurplusOrDeficit;
 
+        private string title;
 
-        public EventDetailsForm(EventManager eventmanager)
+        public EventDetailsForm(EventManager eventmanager, String title)
         {
+            this.title = title;
             InitializeComponent();
             eventManager = eventmanager;
             InitializeGUI();
-
         }
 
         private void InitializeGUI()
         {
             ForeColor = commonForeColor;
-            Text = "Event Organizer";
+            Text = title;
             Size = new Size(900, 700);
 
             Panel mainPanel = new()
