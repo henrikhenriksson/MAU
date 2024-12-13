@@ -2,6 +2,7 @@
 
 using Assignment6_HT2024_DA204E_AQ7150.Classes;
 using static Assignment6_HT2024_DA204E_AQ7150.Enums.Enums;
+using Task = Assignment6_HT2024_DA204E_AQ7150.Classes.Task;
 
 namespace Assignment6_HT2024_DA204E_AQ7150
 {
@@ -16,6 +17,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150
         private DateTimePicker dueDatePicker;
         private ComboBox priorityComboBox;
         private Button addTaskButton;
+        private ListBox taskListBox;
 
         private TaskManager taskManager;
 
@@ -31,15 +33,49 @@ namespace Assignment6_HT2024_DA204E_AQ7150
             InitializeMainPanel();
             initilizeMenuStrip();
             InitializeInputControls();
+            InitializeTaskListBox();
 
             MainMenuStrip = menuStrip;
-            Controls.Add(mainPanel);
             Controls.Add(menuStrip);
+            Controls.Add(mainPanel);
 
             Text = "Task Manager";
             StartPosition = FormStartPosition.CenterScreen;
             Size = new Size(800, 600);
 
+        }
+
+        private void InitializeTaskListBox()
+        {
+
+            taskListBox = new ListBox()
+            {
+                Dock = DockStyle.Fill
+            };
+
+
+            Label taskListLabel = new Label()
+            {
+                Text = "Tasks: ",
+                AutoSize = true,
+                Dock = DockStyle.Top,
+                Padding = new Padding(10, 10, 0, 5)
+            };
+
+            mainPanel.Controls.Add(taskListLabel);
+
+            mainPanel.Controls.Add(taskListBox);
+
+
+        }
+
+        private void UpdateTaskListDisplay()
+        {
+            taskListBox.Items.Clear();
+            foreach (var task in taskManager.GetAllTasks())
+            {
+                taskListBox.Items.Add(task.ToString());
+            }
         }
 
         private void InitializeInputControls()
@@ -112,14 +148,50 @@ namespace Assignment6_HT2024_DA204E_AQ7150
             inputTable.Controls.Add(addTaskButton, 1, 3);
 
             mainPanel.Controls.Add(inputTable);
-
-
-
         }
 
         private void AddTaskButton_Click(object? sender, EventArgs e)
         {
-            MessageBox.Show("New menu clicked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            try
+            {
+                string description = taskDescriptionTextBox.Text.Trim();
+                if (string.IsNullOrEmpty(description))
+                {
+                    MessageBox.Show("Description cannot be emtpy", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                DateTime dueDate = dueDatePicker.Value;
+                if (dueDate < DateTime.Now)
+                {
+                    MessageBox.Show("Due Date cannot be in the past.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!Enum.TryParse(priorityComboBox.SelectedItem.ToString(), out PriorityLevel priority))
+                {
+                    MessageBox.Show("Invalid priority selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                Task newTask = new Task(description, dueDate, priority);
+                taskManager.AddTask(newTask);
+
+                UpdateTaskListDisplay();
+
+                MessageBox.Show("Task added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // reset values for new entry.
+                taskDescriptionTextBox.Clear();
+                dueDatePicker.Value = DateTime.Now;
+                priorityComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void InitializeMainPanel()
@@ -168,7 +240,8 @@ namespace Assignment6_HT2024_DA204E_AQ7150
 
         private void SaveMenuItem_Click(object? sender, EventArgs e)
         {
-            MessageBox.Show("Save menu clicked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("New menu clicked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
         }
 

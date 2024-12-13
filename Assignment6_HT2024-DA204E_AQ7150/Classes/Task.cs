@@ -23,7 +23,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
             {
 
 
-                if (string.IsNullOrWhiteSpace(_description))
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentNullException("An empty Descrition is not very useful.\n Please enter some description");
                 }
