@@ -64,12 +64,13 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
             return Priority.ToString().Replace("_", " ");
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
 
             //return $"Task: {Description}, Due: {DueDate:g}. Priority: {Priority}";
 
             return $"{DueDate.ToLongDateString(),-20} {GetTimeString(),10} {GetFormattedPriorityLevelString(),-16} {Description,-20}";
-        
+
         }
         private string GetTimeString()
         {

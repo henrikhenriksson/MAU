@@ -66,7 +66,7 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
             {
                 Font = commonFont,
                 BackColor = commonBackColor,
-              
+
                 Location = new Point(130, 60),
                 Size = new Size(200, 20)
             };
@@ -186,34 +186,88 @@ namespace Assignment5_HT2024_DA204E_AQ7150.Forms
 
         private void SaveParticipant(TextBox txtFirstName, TextBox txtLastName, TextBox txtStreet, TextBox txtCity, TextBox txtPostalCode, ComboBox countryComboBox)
         {
+
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text))
+            {
+                MessageBox.Show("First Name is required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                MessageBox.Show("Last Name is required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtStreet.Text))
+            {
+                MessageBox.Show("Street is required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtCity.Text))
+            {
+                MessageBox.Show("City is required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPostalCode.Text))
+            {
+                MessageBox.Show("Postal Code is required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (countryComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a country.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Parse and validate the country
+            if (!Enum.TryParse(countryComboBox.SelectedItem.ToString(), out Countries country))
+            {
+                MessageBox.Show("Invalid country selection.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
             string firstName = txtFirstName.Text;
             string lastName = txtLastName.Text;
             string street = txtStreet.Text;
             string city = txtCity.Text;
             string postalCode = txtPostalCode.Text;
-            Countries country = (Countries)Enum.Parse(typeof(Countries), countryComboBox.SelectedItem.ToString());
-
-            Address address = new Address(street, city, postalCode, country);
-
-            if (isUpdateMode)
+            //Countries country = (Countries)Enum.Parse(typeof(Countries), countryComboBox.SelectedItem.ToString());
+            try
             {
-                participant.FirstName = firstName;
-                participant.LastName = lastName;
-                participant.Address = address;
-                MessageBox.Show("Participant updated successfully.", "Success");
-            }
-            else
-            {
-                if (!eventManager.AddParticipant(firstName, lastName, address))
+                Address address = new Address(street, city, postalCode, country);
+
+
+                if (isUpdateMode)
                 {
-                    MessageBox.Show("Participant already exists or invalid input.", "Error");
+                    participant.FirstName = firstName;
+                    participant.LastName = lastName;
+                    participant.Address = address;
+                    MessageBox.Show("Participant updated successfully.", "Success");
                 }
                 else
                 {
-                    MessageBox.Show("Participant added successfully.", "Success");
+                    if (!eventManager.AddParticipant(firstName, lastName, address))
+                    {
+                        MessageBox.Show("Participant already exists or invalid input.", "Error");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Participant added successfully.", "Success");
+                    }
                 }
+                this.Close();
             }
-            this.Close();
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show($"Invalid input. {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }
