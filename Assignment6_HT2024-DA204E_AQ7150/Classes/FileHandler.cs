@@ -12,8 +12,14 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
     {
         private const string FileVersionToken = "TASK_FILE_V1";
 
-        private static void SaveTasks(string filePath, TaskManager taskManager)
+        public static void SaveTasks(string filePath, TaskManager taskManager)
         {
+
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                throw new ArgumentException("File path cannot be null or empty.", nameof(filePath));
+            }
+
             try
             {
 
@@ -44,7 +50,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
 
         }
 
-        public static void LoadTasks(string filePath, TaskManager manager)
+        public static void LoadTasks(string filePath, TaskManager taskManager)
         {
             try
             {
@@ -59,7 +65,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
 
                 if (int.TryParse(reader.ReadLine(), out var taskCount))
                 {
-                    manager = new();
+                    taskManager.ClearTasks();
 
                     for (int i = 0; i < taskCount; i++)
                     {
@@ -68,7 +74,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
                         PriorityLevel priority = (PriorityLevel)Enum.Parse(typeof(PriorityLevel), reader.ReadLine());
 
                         Task task = new(description, dueDate, priority);
-                        manager.AddTask(task);
+                        taskManager.AddTask(task);
                     }
 
                 }

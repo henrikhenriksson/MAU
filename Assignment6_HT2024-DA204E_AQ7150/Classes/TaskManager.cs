@@ -50,6 +50,11 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
 
         public List<Task> GetAllTasks() { return new List<Task>(_tasks); }
 
+        public void ClearTasks()
+        {
+            _tasks.Clear();
+        }
+
 
         public string[] GetInfoStringList()
         {

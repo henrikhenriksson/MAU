@@ -1,6 +1,6 @@
 ﻿namespace Assignment6_HT2024_DA204E_AQ7150
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
