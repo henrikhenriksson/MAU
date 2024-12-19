@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Written by: Henrik Henriksson(AQ7150)
+
 using static Assignment6_HT2024_DA204E_AQ7150.Enums.Enums;
 
 namespace Assignment6_HT2024_DA204E_AQ7150.Classes
@@ -14,22 +10,17 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
         private string _description;
         private DateTime _dueDate;
         private PriorityLevel _priority;
-
-
         public string Description
         {
             get { return _description; }
             set
             {
-
-
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentNullException("An empty Descrition is not very useful.\n Please enter some description");
                 }
 
                 _description = value;
-
             }
         }
 
@@ -51,7 +42,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
 
         public PriorityLevel Priority { get { return _priority; } set { _priority = value; } }
 
-
+        // we use only parameterized constructor for this class as all the fields should be considered required
         public Task(string description, DateTime dueDate, PriorityLevel priority)
         {
             Description = description;
@@ -59,19 +50,19 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
             Priority = priority;
         }
 
+        // enums are formatted with _, E.G: Very_Important
         private string GetFormattedPriorityLevelString()
         {
             return Priority.ToString().Replace("_", " ");
         }
 
+        // Override
+        //  converts task field values with formatting to make prettier printout.
         public override string ToString()
         {
-
-            //return $"Task: {Description}, Due: {DueDate:g}. Priority: {Priority}";
-
-            return $"{DueDate.ToLongDateString(),-20} {GetTimeString(),10} {GetFormattedPriorityLevelString(),-16} {Description,-20}";
-
+            return $"{DueDate.ToShortDateString(),-15} {GetTimeString(),-10} {GetFormattedPriorityLevelString(),-30} {Description.PadLeft(35)}";
         }
+        // prettier format of timestring
         private string GetTimeString()
         {
             return $"{DueDate.Hour:D2}:{DueDate.Minute:D2}";
