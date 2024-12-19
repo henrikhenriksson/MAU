@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Written by: Henrik Henriksson(AQ7150)
 
 namespace Assignment6_HT2024_DA204E_AQ7150.Enums
 {
