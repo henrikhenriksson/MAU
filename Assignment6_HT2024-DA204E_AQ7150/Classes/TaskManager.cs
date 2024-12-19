@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Written by: Henrik Henriksson(AQ7150)
+
 
 namespace Assignment6_HT2024_DA204E_AQ7150.Classes
 {
@@ -25,6 +21,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
             _tasks.Add(task);
         }
 
+        // not used for this assignment
         public void RemoveTask(int index)
         {
             if (index < 0 || index >= _tasks.Count)
@@ -34,7 +31,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
 
             _tasks.RemoveAt(index);
         }
-
+        // not used for this assignment
         public void UpdateTask(int index, Task updatedTask)
         {
             if (index < 0 || index >= _tasks.Count)
@@ -55,7 +52,7 @@ namespace Assignment6_HT2024_DA204E_AQ7150.Classes
             _tasks.Clear();
         }
 
-
+        // build a string array of all task toString outputs.
         public string[] GetInfoStringList()
         {
             string[] infoStrings = new string[_tasks.Count];
